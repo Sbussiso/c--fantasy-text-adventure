@@ -141,10 +141,12 @@ namespace TextAdventure
                       if (playerCharacter.Health <= 0)
                       {
                           Console.WriteLine("You have been defeated!");
+                          //TODO
                       }
                       else if (enemyHealth <= 0)
                       {
                           Console.WriteLine("You have defeated the enemy!");
+                          //TODO
                       }
                     }
                     //user listens to guard
@@ -530,6 +532,12 @@ namespace TextAdventure
                                 if (playerCharacter.Health <= 0)
                                 {
                                     Console.WriteLine("You have been defeated!");
+                                    Console.WriteLine("*You fall to the ground in pain, barely concious.*\n");
+                                    Console.WriteLine("*You feel yourself becoming lighter your blood spills on the floor.*\n");
+                                    Console.WriteLine("*You close your eyes and drift off into the darkness.*\n");
+
+                                    Console.WriteLine("_________________END OF GAME_____________________");
+                                    Console.WriteLine("You got: The bad ending! You died in the factory. You were never heard from again.");
                                 }
                                 else if (enemyHealth <= 0)
                                 {
@@ -537,14 +545,126 @@ namespace TextAdventure
 
                                     Console.WriteLine("*You've made it to the exit, you see the door is locked and you need a key to open it*\n");
                                     Console.WriteLine("*You also see a guard running twards you from the distance*\n");
-                                    Console.WriteLine("*You realize have to think of something quick or enter another fight*\n");
+                                    Console.WriteLine("*You realize you have to think of something quick or enter another fight*\n");
                                     //choices
                                     Console.WriteLine("1. fight the guard");
                                     Console.WriteLine("2. look for a key");
-                                    Console.Write("choice: "); Console.ReadLine();
+                                    Console.Write("choice: "); 
+                                    string choice = Console.ReadLine();
+
+                                    //fighting the guard
+                                    if (choice == "1")
+                                    {
+                                      Fights fight2 = new Fights(playerCharacter);
+                                      // Prepare enemy details:
+                                      int enemyHealth2 = 50;
+                                      int enemyStrength2 = 10;
+                                      int enemySpeed2 = 12;
+                                      int enemyLuck2 = 5;
+                                      fight2.Battle(ref enemyHealth2, enemyStrength2, enemySpeed2, enemyLuck2);
+                                      //battle outcome
+                                      if (playerCharacter.Health <= 0)
+                                      {
+                                          Console.WriteLine("You have been defeated!");
+                                          Console.WriteLine("*You fall to the ground in pain, barely concious.*\n");
+                                          Console.WriteLine("*You feel yourself becoming lighter your blood spills on the floor.*\n");
+                                          Console.WriteLine("*You close your eyes and drift off into the darkness.*\n");
+
+                                          Console.WriteLine("_________________END OF GAME_____________________");
+                                          Console.WriteLine("You got: The bad ending! You died in the factory. You were never heard from again.");
+                                      }
+                                      else if (enemyHealth2 <= 0)
+                                      {
+                                          Console.WriteLine("You have defeated the enemy!");
+                                          Console.WriteLine("*You see one of the guards you just defeated droped his key on the ground, you pick it up and unlock the door*\n");
+                                          Console.WriteLine("*You open the door and run out of the factory*\n");
+                                          Console.WriteLine("*You feel the warmth and smell of freedom, you burst out in joy*\n");
+                                          Console.WriteLine("*You run out the door and continue to run*\n");
+
+                                      }
+
+                                    }
+                                    else if (choice == "2")
+                                    {
+                                      Console.WriteLine("*You look around and see the guard running twards you getting closer*\n");
+                                      //inteligence roll
+                                      int luckRoll2 = luckDice.Next(0 , playerCharacter.Luck);
+                                      int luck2 = playerCharacter.Intelligence + luckRoll2;
+                                      if (luck2 > 30)
+                                      {
+                                        Console.WriteLine("*You see one of the guards you just defeated droped his key on the ground, you pick it up and unlock the door*\n");
+                                        Console.WriteLine("*You open the door and run out of the factory*\n");
+                                        Console.WriteLine("*You feel the warmth and smell of freedom, you burst out in joy*\n");
+                                        Console.WriteLine("*You run out the door and continue to run*\n");
+
+                                        Console.WriteLine("_________________END OF GAME_____________________");
+                                        Console.WriteLine("You got: The good ending! You escaped the factory and lived to tell the tale. You were never heard from again.");
+                                        Console.WriteLine(playerCharacter.Image);
+                                      }
+                                      else
+                                      {
+                                        Console.WriteLine("*You look around and see the guard running twards you getting closer*\n");
+                                        Console.WriteLine("*You dont see a key anywhere, you realize you have no choice but to fight*\n");
+                                        Console.WriteLine("*You prepare yourself for another fight*\n");
+                                        //fight logic
+                                        Fights fight2 = new Fights(playerCharacter);
+                                        // Prepare enemy details:
+                                        int enemyHealth2 = 50;
+                                        int enemyStrength2 = 10;
+                                        int enemySpeed2 = 12;
+                                        int enemyLuck2 = 5;
+                                        fight2.Battle(ref enemyHealth2, enemyStrength2, enemySpeed2, enemyLuck2);
+                                        //battle outcome
+                                        if (playerCharacter.Health <= 0)
+                                        {
+                                            Console.WriteLine("You have been defeated!");
+                                            Console.WriteLine("*You fall to the ground in pain, barely concious.*");
+                                            Console.WriteLine("*You feel yourself becoming lighter your blood spills on the floor.*\n");
+                                            Console.WriteLine("*You close your eyes and drift off into the darkness.*\n");
+
+                                            Console.WriteLine("_________________END OF GAME_____________________");
+                                            Console.WriteLine("You got: The bad ending! You died in the factory. You were never heard from again.");
+                                        }
+                                        else if (enemyHealth2 <= 0)
+                                        {
+                                            Console.WriteLine("You have defeated the enemy!");
+                                            Console.WriteLine("*You see one of the guards you just defeated droped his key on the ground, you pick it up and unlock the door*\n");
+                                            Console.WriteLine("*You open the door and run out of the factory*\n");
+                                            Console.WriteLine("*You feel the warmth and smell of freedom, you burst out in joy*\n");
+                                            Console.WriteLine("*You run out the door and continue to run*\n");
+
+                                            Console.WriteLine("_________________END OF GAME_____________________");
+                                            Console.WriteLine("You got: The good ending! You escaped the factory and lived to tell the tale. You were never heard from again.");
+                                        }
+
+                                      }
+                        
+
+                                    }
+                                    else
+                                    {
+                                      Console.WriteLine("invalid entry");
+                                    }
                                 }   
                                 
                             
+                            }
+                            else if (choice3 == "3")
+                            {
+                                Console.WriteLine("*You raise your hands in the air and surrender*\n");
+                                Console.WriteLine("*You realize you have no choice but to go back to the factory floor*\n");
+                                Console.WriteLine("*You think back to a time before your village was invaded, a time when you used to be free*\n");
+                                Console.WriteLine("*You also think about how dangerous it is to escape the factory, not to mention impossible*\n");
+
+                                Console.WriteLine("_________________END OF GAME_____________________");
+
+                                Console.WriteLine();
+
+                                Console.WriteLine("You got: The lame ending! You went back to work and died in the factory. You were never heard from again.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("invalid entry");
                             }
 
                         }
@@ -581,6 +701,25 @@ namespace TextAdventure
                                 playerCharacter.Health = playerCharacter.Health - 150;
 
                                 //fight logic
+                                Fights fight = new Fights(playerCharacter);
+                                // Prepare enemy details:
+                                int enemyHealth = 50;
+                                int enemyStrength = 10;
+                                int enemySpeed = 12;
+                                int enemyLuck = 5;
+                                fight.Battle(ref enemyHealth, enemyStrength, enemySpeed, enemyLuck);
+                                //battle outcome
+                                if (playerCharacter.Health <= 0)
+                                {
+                                    Console.WriteLine("You have been defeated!");
+                                    //TODO
+                                }
+                                else if (enemyHealth <= 0)
+                                {
+                                    Console.WriteLine("You have defeated the enemy!");
+                                    //TODO
+                                }
+
                             }
 
                             else if (choice3 == "2")
