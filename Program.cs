@@ -716,7 +716,12 @@ namespace TextAdventure
                                 if (playerCharacter.Health <= 0)
                                 {
                                     Console.WriteLine("You have been defeated!");
-                                    //TODO
+                                    Console.WriteLine("*You fall to the ground in pain, barely concious.*\n");
+                                    Console.WriteLine("*You feel yourself becoming lighter your blood spills on the floor.*\n");
+                                    Console.WriteLine("*You close your eyes and drift off into the darkness.*\n");
+
+                                    Console.WriteLine("_________________END OF GAME_____________________");
+                                    Console.WriteLine("You got: The bad ending! You died in the factory. You were never heard from again.");
                                 }
                                 else if (enemyHealth <= 0)
                                 {
@@ -815,7 +820,13 @@ namespace TextAdventure
                 }
                 else if (choice1 == "listen")
                 {
-                    Console.WriteLine("prepare comply logic");
+                    Console.WriteLine("*you go back down to the factory floor very tired and exahsted.*");
+                    Console.WriteLine("*You think back to a time before your village was invaded, a time when you used to be free*");
+                    Console .WriteLine("*You also think about how dangerous it is to escape the factory, not to mention impossible*");
+
+                    Console.WriteLine("_________________END OF GAME_____________________");
+                    Console.WriteLine();
+                    Console.WriteLine("You got: The lame ending! You went back to work and died in the factory. You were never heard from again.");
                 }
             }
             else
