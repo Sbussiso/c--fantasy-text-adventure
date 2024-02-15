@@ -130,171 +130,12 @@ namespace TextAdventure
                     //attacking side character Jonavo choice2
                     if (choice2 == "1")
                     {
-                        
-                        int jonavoHealth = 500;
-                        while (playerCharacter.Health > 0)
-                        {
-                        //will loop untill player is dead or enemy is defeated
-                        //Jonavo the guard and player stats
-                        
-                        int roll = critDice.Next(1,5);
-
-                        int userLuck = luckDice.Next(0 , playerCharacter.Luck);
-                        int totalDamage = playerCharacter.Strength * roll + userLuck;   
-
-                        int jonavoStrength = 30; //100
-                        int jonavoLuck = luckDice.Next(0, 20);
-                        int jonavoSpeed = 20;
-                        int jonavoIntelegence = 20;
-                        int jonavoTotalDamage = jonavoStrength * roll + jonavoLuck;
-                            
-
-                            //player attack
-                            Console.WriteLine("1. attack");
-                            Console.WriteLine("2. view inventory");
-                            string fightOption = Console.ReadLine();
-
-                            if (fightOption == "1")
-                            {
-                              //initial player attack roll
-                              Console.WriteLine($"Your attack: Strength: {playerCharacter.Strength} critical boost: x{roll}, Luck: {userLuck}, Power: {totalDamage}, Speed {playerCharacter.Speed}\n");
-                              
-                              //jonavo counter roll
-                              jonavoSpeed = critDice.Next(0, jonavoSpeed);
-                              jonavoStrength = critDice.Next(0, jonavoStrength);
-                              Console.WriteLine($"Jonavo's counter: Dodge (speed roll): {jonavoSpeed}, Block (strength roll): {jonavoStrength} Luck: {jonavoLuck}");
-
-                              //actual attack
-                              if (jonavoStrength + jonavoLuck > totalDamage)
-                              {
-                                Console.WriteLine("Jonavo had enough strength to block your attack");
-                                Console.WriteLine("_______________________________________________");
-                                Console.WriteLine("Press enter to continue.....");
-                                Console.ReadLine();
-                              }
-                              else if (jonavoSpeed + jonavoLuck > playerCharacter.Speed)
-                              {
-                                Console.WriteLine("Jonavo was fast enough to dodge your attack");
-                                Console.WriteLine("_______________________________________________");
-                                Console.WriteLine("Press enter to continue.....");
-                                Console.ReadLine();
-                              }
-                              else
-                              {
-                                Console.WriteLine("Your attack was successfull");
-                                jonavoHealth = jonavoHealth - totalDamage;
-                                Console.WriteLine($"health: {jonavoHealth}");
-                                Console.WriteLine(guardJonavo);
-                                Console.WriteLine("_______________________________________________");
-
-                                Console.WriteLine("Press enter to continue.....");
-                                Console.ReadLine();
-                                //ends attack logic if enemy is dead
-                                if (jonavoHealth <= 0)
-                                {
-                                    break;
-                                }
-                                
-
-                                
-                                
-
-                                //enemy attack roll
-                                Console.WriteLine($"Jonavo's attack: {jonavoStrength}, critical boost: x{roll} Luck: {jonavoLuck} Power: {jonavoTotalDamage}, speed {jonavoSpeed}\n");
-
-                                //player counter roll
-                                int playerDodge = critDice.Next(0, playerCharacter.Speed);
-                                int playerBlock = critDice.Next(0, playerCharacter.Strength);
-                                Console.WriteLine($"Your counter: Dodge (speed roll): {playerDodge}, Block (strength roll): {playerBlock} Luck: {userLuck}");
-                            
-                            
-                                //player takes no damage if enemy attack is blocked or dodged
-                                if (playerDodge + userLuck > jonavoSpeed)
-                                {
-                                  Console.WriteLine("*You quickly move out of the way dodging the attack.....*");
-                                  Console.WriteLine("_______________________________________________");
-                                  Console.WriteLine("Press enter to continue.....");
-                                  Console.ReadLine();
-                                }
-                                else if (playerBlock + userLuck > jonavoStrength)
-                                {
-                                  Console.WriteLine("You block the attack avoiding damage.....");
-                                  Console.WriteLine("_______________________________________________");
-                                  Console.WriteLine("Press enter to continue.....");
-                                  Console.ReadLine();
-                                }
-                                else
-                                {
-                                  Console.WriteLine("The enemies attack was successful.....");
-
-                                  playerCharacter.Health = playerCharacter.Health - jonavoTotalDamage;
-                                  Console.WriteLine($"Health: {playerCharacter.Health}");
-                                  Console.WriteLine(playerCharacter.Image);
-                                  Console.WriteLine("_______________________________________________");
-                                  Console.Write("Press any key to continue.....");
-                                  Console.ReadLine();
-
-                                }
-
-                              }
-                              
-                            }
-
-                            else if (fightOption == "2")
-                            {
-                              playerCharacter.ShowInventory();
-                              Console.WriteLine("\nGrab item: ");
-                            }
-
-                            
-                            
-                            
-
-                            //while loop will already break if players health is not greater than 0
-
-                        }
-
-                        if (playerCharacter.Health <= 0)
-                        {
-                          Console.WriteLine("\n*YOU LOST the fight*\n");
-                          Console.WriteLine("*he hits you with a finishing blow and taunts you untill you lose conciousness*\n");
-
-                          //dungion code
-                          Console.WriteLine("\n*You wake up your entire body in pain, you realize almost imediately where you are*\n");
-                          Console.WriteLine("\n*Your in the worst part of the factory, the dungion.*\n");
-                          
-                          
-                          Console.WriteLine("Story TBC........");
-                        }
-                        else
-                        {
-                          Console.WriteLine("*he falls to the ground in pain and loses consiousnes*\n");
-                          Console.WriteLine("*You take a long look at him on the ground, he's definetly not getting up any time soon*\n");
-                          Console.WriteLine("*You lean down and search him*");
-                          Console.WriteLine(@"ADDED TO INVENTORY:
-                                            --------------------
-                                            +1 key
-                                            +1 potion of health
-                                            +1 potion of speed");
-
-                          playerCharacter.AddToInventory("key");
-                          playerCharacter.AddToInventory("potion of health");
-                          playerCharacter.AddToInventory("potion of speed");
-                          
-                          Console.WriteLine("\n*Only a matter of time untill someone else finds me or him*");
-
-                          Console.WriteLine("\n________Choice_________");
-                          Console.WriteLine("1. run to the exit");
-                          Console.WriteLine("story TBC, more options to come");
-                          
-                        }
-                     
-
-
+                      Fights fight = new Fights(playerCharacter);
+                      fight.Battle();
                     }
                     else if (choice2 == "2")
                     {
-                        Console.WriteLine("*having been a bitch you go back down to the factory floor very tired and exahsted.*");
+                        Console.WriteLine("*you go back down to the factory floor very tired and exahsted.*");
                         Console.WriteLine("*You think back to a time before your village was invaded, a time when you used to be free*");
                         Console .WriteLine("*You also think about how dangerous it is to escape the factory, not to mention impossible*");
 
@@ -302,7 +143,7 @@ namespace TextAdventure
 
                         Console.WriteLine();
 
-                        Console.WriteLine("You got: The Bitch Ending");
+                        Console.WriteLine("You got: The lame ending! You went back to work and died in the factory. You were never heard from again.");
                     }
                     // user tries to escape
                     else if (choice2 == "3")
@@ -1027,28 +868,62 @@ namespace TextAdventure
                 int roll = critDice.Next(1, 5);
                 int userLuck = luckDice.Next(0, playerCharacter.Luck);
                 int totalDamage = playerCharacter.Strength * roll + userLuck;
+                int enemyTotalDamage = enemyStrength * roll + enemyLuck;
+                //enemyHealth = 500;
+                //enemyStrength = 30; //100
+                //enemyLuck = luckDice.Next(0, 20);
+                //enemySpeed = 20;
+                //enemyIntelegence = 20;
+                
 
-                int jonavoTotalDamage = enemyStrength * roll + luckDice.Next(0, enemyLuck);
 
-                // Implement the fighting logic here, similar to what you've described in your code snippet.
-                // This would include handling the player's and enemy's attacks, calculating damage, and updating health.
+                Console.WriteLine("1. attack");
+                Console.WriteLine("2. view inventory");
+                string fightOption = Console.ReadLine();
 
-                // For brevity, details of implementing each action (e.g., attack, view inventory) are omitted.
-                // You would fill in these details similarly to how you handled them in your original code.
+                if (fightOption == "1")
+                {
+                  //player attack
+                  Console.WriteLine($"You attack for {totalDamage} damage!");
+                  Console.WriteLine($"Strength: {playerCharacter.Strength}");
+                  Console.WriteLine($"Speed: {playerCharacter.Speed}");
+                  Console.WriteLine($"Luck: {userLuck}");
+                  Console.WriteLine($"Critical: {roll}");
+                  enemyHealth = enemyHealth - totalDamage;
+
+                  //enemy attack
+                  Console.WriteLine($"Enemy attacks for {enemyTotalDamage} damage!");
+                  Console.WriteLine($"Strength: {enemyStrength}");
+                  Console.WriteLine($"Speed: {enemySpeed}");
+                  Console.WriteLine($"Luck: {enemyLuck}");
+                  Console.WriteLine($"Critical: {roll}");
+                  playerCharacter.Health = playerCharacter.Health - enemyTotalDamage;
+                }
+                else if (fightOption == "2")
+                {
+                  playerCharacter.ShowInventory();
+                }
+                else
+                {
+                  Console.WriteLine("invalid entry.......");
+                }
+                
+
 
                 Console.WriteLine("Implement the detailed fighting logic here...");
 
                 // Example of checking for the outcome after each round.
-                if (enemyHealth <= 0)
-                {
-                    Console.WriteLine($"{enemyName} has been defeated!");
-                    // Handle victory conditions, e.g., updating player stats, inventory, etc.
-                }
-                else if (playerCharacter.Health <= 0)
-                {
-                    Console.WriteLine($"{playerCharacter.Name} has been defeated!");
-                    // Handle defeat conditions.
-                }
+                if (jonavoHealth <= 0)
+                  {
+                      Console.WriteLine($"the guard has been defeated!");
+                      
+                      // Handle victory conditions, e.g., updating player stats, inventory, etc.
+                  }
+                  else if (playerCharacter.Health <= 0)
+                  {
+                      Console.WriteLine($"{playerCharacter.Name} has been defeated!");
+                      // Handle defeat conditions.
+                  }
             }
         }
     }
