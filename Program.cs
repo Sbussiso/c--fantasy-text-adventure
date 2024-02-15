@@ -185,7 +185,7 @@ namespace TextAdventure
                            
                       
                             Console.WriteLine("_______Choice________");
-                            Console.WriteLine("1. come up with a plan");
+                            Console.WriteLine("1. come up with a plan (intelligence roll)");
                             Console.WriteLine("2. fight your way through the exit");
                             Console.WriteLine("3. surender");
                             string choice3 = Console.ReadLine();
@@ -548,8 +548,8 @@ namespace TextAdventure
                                     Console.WriteLine("*You realize you have to think of something quick or enter another fight*\n");
                                     //choices
                                     Console.WriteLine("1. fight the guard");
-                                    Console.WriteLine("2. look for a key");
-                                    Console.Write("choice: "); 
+                                    Console.WriteLine("2. Think of something (inteligence roll)");
+                                    Console.Write("choice: ");
                                     string choice = Console.ReadLine();
 
                                     //fighting the guard
@@ -580,6 +580,10 @@ namespace TextAdventure
                                           Console.WriteLine("*You open the door and run out of the factory*\n");
                                           Console.WriteLine("*You feel the warmth and smell of freedom, you burst out in joy*\n");
                                           Console.WriteLine("*You run out the door and continue to run*\n");
+
+                                          Console.WriteLine("_________________END OF GAME_____________________");
+                                          Console.WriteLine("You got: The good ending! You escaped the factory and lived to tell the tale. You were never heard from again.");
+                                          Console.WriteLine(playerCharacter.Image);
 
                                       }
 
@@ -745,6 +749,24 @@ namespace TextAdventure
                                   playerCharacter.Health = playerCharacter.Health - 100;
 
                                   //fight logic
+                                  Fights fight = new Fights(playerCharacter);
+                                  // Prepare enemy details:
+                                  int enemyHealth = 50;
+                                  int enemyStrength = 10;
+                                  int enemySpeed = 12;
+                                  int enemyLuck = 5;
+                                  fight.Battle(ref enemyHealth, enemyStrength, enemySpeed, enemyLuck);
+                                  //battle outcome
+                                  if (playerCharacter.Health <= 0)
+                                  {
+                                      Console.WriteLine("You have been defeated!");
+                                      //TODO
+                                  }
+                                  else if (enemyHealth <= 0)
+                                  {
+                                      Console.WriteLine("You have defeated the enemy!");
+                                      //TODO
+                                  }
 
                                 }
                             }
