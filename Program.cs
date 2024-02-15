@@ -131,8 +131,23 @@ namespace TextAdventure
                     if (choice2 == "1")
                     {
                       Fights fight = new Fights(playerCharacter);
-                      fight.Battle();
+                      // Prepare enemy details:
+                      int enemyHealth = 50;
+                      int enemyStrength = 10;
+                      int enemySpeed = 12;
+                      int enemyLuck = 5;
+                      fight.Battle(ref enemyHealth, enemyStrength, enemySpeed, enemyLuck);
+                      //battle outcome
+                      if (playerCharacter.Health <= 0)
+                      {
+                          Console.WriteLine("You have been defeated!");
+                      }
+                      else if (enemyHealth <= 0)
+                      {
+                          Console.WriteLine("You have defeated the enemy!");
+                      }
                     }
+                    //user listens to guard
                     else if (choice2 == "2")
                     {
                         Console.WriteLine("*you go back down to the factory floor very tired and exahsted.*");
@@ -497,11 +512,39 @@ namespace TextAdventure
 
                             else if (choice3 == "2")
                             {
-                                Console.WriteLine("*You gather all your strength and charge for the exit. Your no bitch you draw your weapon and prepare to take the guard on*\n");
+                                Console.WriteLine("*You gather all your strength and charge for the exit. you've decided to go for it!*\n");
+                                Console.WriteLine("*You run as fast as you can, dodging and weaving through obsticles and workers*\n");
+                                Console.WriteLine("*You make it near the exit and see another guard already there*\n");
                                 Console.WriteLine("*You here the guard from before catching up, its obvious your going to have to fight both of them at once*\n");
                                 Console.WriteLine($"{guardJonavo}           {guardJonavo}");
 
                                 //fighting 2 guards at once
+                                Fights fight = new Fights(playerCharacter);
+                                // Prepare enemy details:
+                                int enemyHealth = 80;
+                                int enemyStrength = 82;
+                                int enemySpeed = 20;
+                                int enemyLuck = 12;
+                                fight.Battle(ref enemyHealth, enemyStrength, enemySpeed, enemyLuck);
+                                //battle outcome
+                                if (playerCharacter.Health <= 0)
+                                {
+                                    Console.WriteLine("You have been defeated!");
+                                }
+                                else if (enemyHealth <= 0)
+                                {
+                                    Console.WriteLine("You have defeated the enemy!");
+
+                                    Console.WriteLine("*You've made it to the exit, you see the door is locked and you need a key to open it*\n");
+                                    Console.WriteLine("*You also see a guard running twards you from the distance*\n");
+                                    Console.WriteLine("*You realize have to think of something quick or enter another fight*\n");
+                                    //choices
+                                    Console.WriteLine("1. fight the guard");
+                                    Console.WriteLine("2. look for a key");
+                                    Console.Write("choice: "); Console.ReadLine();
+                                }   
+                                
+                            
                             }
 
                         }
@@ -859,11 +902,11 @@ namespace TextAdventure
             playerCharacter = player;
         }
 
-        public void Battle(ref int enemyHealth, int enemyStrength, int enemySpeed, int enemyLuck, string enemyName)
+        public void Battle(ref int enemyHealth, int enemyStrength, int enemySpeed, int enemyLuck)
         {
-            Console.WriteLine($"The battle between {playerCharacter.Name} and {enemyName} begins!");
+            Console.WriteLine($"The battle between {playerCharacter.Name} and the guard begins!");
 
-            while (playerCharacter.Health > 0 && enemyHealth > 0)
+            do
             {
                 int roll = critDice.Next(1, 5);
                 int userLuck = luckDice.Next(0, playerCharacter.Luck);
@@ -879,17 +922,31 @@ namespace TextAdventure
 
                 Console.WriteLine("1. attack");
                 Console.WriteLine("2. view inventory");
+                Console.Write("Choice: ");
                 string fightOption = Console.ReadLine();
 
                 if (fightOption == "1")
                 {
                   //player attack
+                  Console.WriteLine();
                   Console.WriteLine($"You attack for {totalDamage} damage!");
                   Console.WriteLine($"Strength: {playerCharacter.Strength}");
                   Console.WriteLine($"Speed: {playerCharacter.Speed}");
                   Console.WriteLine($"Luck: {userLuck}");
                   Console.WriteLine($"Critical: {roll}");
                   enemyHealth = enemyHealth - totalDamage;
+                  Console.WriteLine($"Enemy Health: {enemyHealth}");
+                  Console.WriteLine();
+
+                  Console.Write("Press any key to confirm........"); Console.ReadLine();
+                  Console.WriteLine();
+
+                  //stops enemy from attacking if dead
+                  if (enemyHealth <= 0)
+                  {
+                    continue;
+                  }
+  
 
                   //enemy attack
                   Console.WriteLine($"Enemy attacks for {enemyTotalDamage} damage!");
@@ -898,6 +955,11 @@ namespace TextAdventure
                   Console.WriteLine($"Luck: {enemyLuck}");
                   Console.WriteLine($"Critical: {roll}");
                   playerCharacter.Health = playerCharacter.Health - enemyTotalDamage;
+                  Console.WriteLine($"Your Health: {playerCharacter.Health}");
+                  Console.WriteLine();
+
+                  Console.Write("Press Enter to confirm........"); Console.ReadLine();
+                  Console.WriteLine();
                 }
                 else if (fightOption == "2")
                 {
@@ -909,22 +971,8 @@ namespace TextAdventure
                 }
                 
 
+            } while (playerCharacter.Health > 0 && enemyHealth > 0);
 
-                Console.WriteLine("Implement the detailed fighting logic here...");
-
-                // Example of checking for the outcome after each round.
-                if (jonavoHealth <= 0)
-                  {
-                      Console.WriteLine($"the guard has been defeated!");
-                      
-                      // Handle victory conditions, e.g., updating player stats, inventory, etc.
-                  }
-                  else if (playerCharacter.Health <= 0)
-                  {
-                      Console.WriteLine($"{playerCharacter.Name} has been defeated!");
-                      // Handle defeat conditions.
-                  }
-            }
         }
     }
 }

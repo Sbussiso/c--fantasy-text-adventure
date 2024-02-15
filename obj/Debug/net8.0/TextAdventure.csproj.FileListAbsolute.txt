@@ -12,3 +12,4 @@ C:\Users\Sbuss\OneDrive\Desktop\C# projects\CsharpProjects\TextAdventure\obj\Deb
 C:\Users\Sbuss\OneDrive\Desktop\C# projects\CsharpProjects\TextAdventure\obj\Debug\net8.0\TextAdventure.pdb
 C:\Users\Sbuss\OneDrive\Desktop\C# projects\CsharpProjects\TextAdventure\obj\Debug\net8.0\TextAdventure.genruntimeconfig.cache
 C:\Users\Sbuss\OneDrive\Desktop\C# projects\CsharpProjects\TextAdventure\obj\Debug\net8.0\ref\TextAdventure.dll
+C:\Users\Sbuss\OneDrive\Desktop\C# Projects\CsharpProjects\TextAdventure\obj\Debug\net8.0\TextAdventure.sourcelink.json
