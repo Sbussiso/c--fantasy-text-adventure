@@ -141,7 +141,8 @@ namespace TextAdventure
                       if (playerCharacter.Health <= 0)
                       {
                           Console.WriteLine("You have been defeated!");
-                          //TODO
+                          Ending end = new Ending();
+                          end.BadEnding();
                       }
                       else if (enemyHealth <= 0)
                       {
@@ -156,11 +157,8 @@ namespace TextAdventure
                         Console.WriteLine("*You think back to a time before your village was invaded, a time when you used to be free*");
                         Console .WriteLine("*You also think about how dangerous it is to escape the factory, not to mention impossible*");
 
-                        Console.WriteLine("_________________END OF GAME_____________________");
-
-                        Console.WriteLine();
-
-                        Console.WriteLine("You got: The lame ending! You went back to work and died in the factory. You were never heard from again.");
+                        Ending end = new Ending();
+                        end.LameEnding();
                     }
                     // user tries to escape
                     else if (choice2 == "3")
@@ -532,12 +530,8 @@ namespace TextAdventure
                                 if (playerCharacter.Health <= 0)
                                 {
                                     Console.WriteLine("You have been defeated!");
-                                    Console.WriteLine("*You fall to the ground in pain, barely concious.*\n");
-                                    Console.WriteLine("*You feel yourself becoming lighter your blood spills on the floor.*\n");
-                                    Console.WriteLine("*You close your eyes and drift off into the darkness.*\n");
-
-                                    Console.WriteLine("_________________END OF GAME_____________________");
-                                    Console.WriteLine("You got: The bad ending! You died in the factory. You were never heard from again.");
+                                    Ending end = new Ending();
+                                    end.BadEnding();
                                 }
                                 else if (enemyHealth <= 0)
                                 {
@@ -566,12 +560,8 @@ namespace TextAdventure
                                       if (playerCharacter.Health <= 0)
                                       {
                                           Console.WriteLine("You have been defeated!");
-                                          Console.WriteLine("*You fall to the ground in pain, barely concious.*\n");
-                                          Console.WriteLine("*You feel yourself becoming lighter your blood spills on the floor.*\n");
-                                          Console.WriteLine("*You close your eyes and drift off into the darkness.*\n");
-
-                                          Console.WriteLine("_________________END OF GAME_____________________");
-                                          Console.WriteLine("You got: The bad ending! You died in the factory. You were never heard from again.");
+                                          Ending end = new Ending();
+                                          end.BadEnding();
                                       }
                                       else if (enemyHealth2 <= 0)
                                       {
@@ -622,12 +612,8 @@ namespace TextAdventure
                                         if (playerCharacter.Health <= 0)
                                         {
                                             Console.WriteLine("You have been defeated!");
-                                            Console.WriteLine("*You fall to the ground in pain, barely concious.*");
-                                            Console.WriteLine("*You feel yourself becoming lighter your blood spills on the floor.*\n");
-                                            Console.WriteLine("*You close your eyes and drift off into the darkness.*\n");
-
-                                            Console.WriteLine("_________________END OF GAME_____________________");
-                                            Console.WriteLine("You got: The bad ending! You died in the factory. You were never heard from again.");
+                                            Ending end = new Ending();
+                                            end.BadEnding();
                                         }
                                         else if (enemyHealth2 <= 0)
                                         {
@@ -660,11 +646,10 @@ namespace TextAdventure
                                 Console.WriteLine("*You think back to a time before your village was invaded, a time when you used to be free*\n");
                                 Console.WriteLine("*You also think about how dangerous it is to escape the factory, not to mention impossible*\n");
 
-                                Console.WriteLine("_________________END OF GAME_____________________");
+                                Ending end = new Ending();
+                                end.LameEnding();
 
-                                Console.WriteLine();
-
-                                Console.WriteLine("You got: The lame ending! You went back to work and died in the factory. You were never heard from again.");
+                                
                             }
                             else
                             {
@@ -716,17 +701,15 @@ namespace TextAdventure
                                 if (playerCharacter.Health <= 0)
                                 {
                                     Console.WriteLine("You have been defeated!");
-                                    Console.WriteLine("*You fall to the ground in pain, barely concious.*\n");
-                                    Console.WriteLine("*You feel yourself becoming lighter your blood spills on the floor.*\n");
-                                    Console.WriteLine("*You close your eyes and drift off into the darkness.*\n");
-
-                                    Console.WriteLine("_________________END OF GAME_____________________");
-                                    Console.WriteLine("You got: The bad ending! You died in the factory. You were never heard from again.");
+                                    Ending end = new Ending();
+                                    end.BadEnding();
+                                    
                                 }
                                 else if (enemyHealth <= 0)
                                 {
                                     Console.WriteLine("You have defeated the enemy!");
                                     //TODO
+                                    
                                 }
 
                             }
@@ -765,7 +748,8 @@ namespace TextAdventure
                                   if (playerCharacter.Health <= 0)
                                   {
                                       Console.WriteLine("You have been defeated!");
-                                      //TODO
+                                      Ending end = new Ending();
+                                      end.BadEnding();
                                   }
                                   else if (enemyHealth <= 0)
                                   {
@@ -822,11 +806,10 @@ namespace TextAdventure
                 {
                     Console.WriteLine("*you go back down to the factory floor very tired and exahsted.*");
                     Console.WriteLine("*You think back to a time before your village was invaded, a time when you used to be free*");
-                    Console .WriteLine("*You also think about how dangerous it is to escape the factory, not to mention impossible*");
+                    Console.WriteLine("*You also think about how dangerous it is to escape the factory, not to mention impossible*");
 
-                    Console.WriteLine("_________________END OF GAME_____________________");
-                    Console.WriteLine();
-                    Console.WriteLine("You got: The lame ending! You went back to work and died in the factory. You were never heard from again.");
+                    Ending end = new Ending();
+                    end.LameEnding();
                 }
             }
             else
@@ -849,7 +832,6 @@ namespace TextAdventure
         public int Luck { get; set; }
         public string Image {get; set; }
         public int Health {get; set; }
-
         //inventory
         private Inventory inventory;
 
@@ -1147,6 +1129,40 @@ namespace TextAdventure
 
         }
     }
+
+    class Ending
+    {
+        public void GoodEnding()
+        {
+            Console.WriteLine("You got: The good ending! You escaped the factory and lived to tell the tale. You were never heard from again.");
+        }
+        public void BadEnding()
+        {
+            Console.WriteLine("*You fall to the ground in pain, barely concious.*\n");
+            Console.WriteLine("*You feel yourself becoming lighter your blood spills on the floor.*\n");
+            Console.WriteLine("*You close your eyes and drift off into the darkness.*\n");
+
+            Console.WriteLine("_________________END OF GAME_____________________");
+            Console.WriteLine("You got: The bad ending! You died in the factory. You were never heard from again.");
+        }
+        public void LameEnding()
+        {
+            Console.WriteLine("_________________END OF GAME_____________________");
+            Console.WriteLine();
+            Console.WriteLine("You got: The lame ending! You went back to work and died in the factory. You were never heard from again.");
+        }
+    }
+
+    class Dungion
+    {
+      public void DungionStory()
+      {
+        Console.WriteLine("You are in a dungion");
+      }
+    }
+
+
+    
 }
 
 
