@@ -1067,10 +1067,14 @@ namespace TextAdventure
 
                 Console.WriteLine("Story TBC...................");
             }
-            else
+            else if (choice5 == "2")
             {
                 Console.WriteLine("\n*You chose to leave him there check the other cell instead*\n");
                 //Dynomite Steve's cell logic
+            }
+            else
+            {
+                Console.WriteLine("Invalid entry.......");
             }
     
         }
