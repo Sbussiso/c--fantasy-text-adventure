@@ -15,21 +15,14 @@ namespace TextAdventure
                 |  `----.|  `--'  | |  |  |  | |  |  |  |  /  _____  \  |  |\   | |  '--'  |   |  `----.|  | |  |\   | |  |____    |  `--'  '--. |  `--'  | |  |____ .----)   |       |  |     
                 \______| \______/  |__|  |__| |__|  |__| /__/     \__\ |__| \__| |_______/    |_______||__| |__| \__| |_______|    \_____\_____\ \______/  |_______||_______/        |__|     
             ");
-
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
-
             Console.Write("Name your character: ");
             string characterName = Console.ReadLine();
-
             Console.WriteLine("Select your character class (ork, elf, dwarf, human):");
             string chosenClass = Console.ReadLine();
-
-            // Initialize the character with the chosen name and class
             Character playerCharacter = new Character(characterName, chosenClass);
-
-            // Display the chosen character's attributes
             Console.WriteLine($"{playerCharacter.Name}, the {playerCharacter.Class}, has the following attributes:");
             Console.WriteLine($"Strength: {playerCharacter.Strength}");
             Console.WriteLine($"Intelligence: {playerCharacter.Intelligence}");
@@ -37,14 +30,12 @@ namespace TextAdventure
             Console.WriteLine($"Luck: {playerCharacter.Luck}");
             Console.WriteLine(playerCharacter.Image);
             Console.WriteLine();
-
             Console.Write("type 'start' to play as character: ");
             string start = Console.ReadLine();
 
             if (start == "start".ToLower())
             {
                 Console.WriteLine("starting game.........\n\n\n\n\n");
-
                 Console.WriteLine("*The year is 200 A.G.E, short for 200 years after The Great Extinction*\n");
                 Console.WriteLine("*The details of how the Great Extinction came about have been lost to history*\n");
                 Console.WriteLine("*The Earth used to be rich with hundreds of different intelligent and non intelligent races and species*\n");
@@ -66,8 +57,6 @@ namespace TextAdventure
                     /'______|___||__###___|____|/'_______|____|_|__###___|___|
                 ");
                 Console.WriteLine("\n\n\n");
-
-                // Actual start
                 string guardJonavo = @"
                     ,      ,
                     /(.-""-.)\
@@ -86,45 +75,33 @@ namespace TextAdventure
                 Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine($"Hey {playerCharacter.Name}! Wake up!, What do you think your doing sleeping without my permission?! Back to the factory floor or else.");
                 Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------");
-
                 Console.WriteLine("\n*Exhausted from countless days of endless work, you struggle to wake up right away. You don't remember drifting off.*\n*Even so, a sense of relief floods your body as you realize today's the day*\n*You've been planning to escape for a while now*\n*It's the goblin king's birthday today which means there will be fewer guards guarding the factory*\n*You open your eyes*\n");
-
                 Console.WriteLine("CHOICE: ('refuse'/'listen')");
                 string choice1 = Console.ReadLine();
-
-                // Fighting variables
                 Random critDice = new Random();
                 Random luckDice = new Random();
-
                 if (choice1 == "refuse")
                 {
                     Console.WriteLine(guardJonavo);
                     Console.WriteLine("----------------------------------------------------------------------");
                     Console.WriteLine("Then we have no use for you, any last words? Or better yet how about the dungeon? We could use some fresh meat to experiment on....");
                     Console.WriteLine("-------------------------------------------------------------------\n");
-
                     Console.WriteLine("*You notice a key on his hip, it looks like an exit or cell key*\n");
                     Console.WriteLine("*He's also wearing armor*");
-
                     Console.WriteLine("_____________Choice_____________");
                     Console.WriteLine("1. Not a fan of either of those really (attack)");
                     Console.WriteLine("2. Ok I get it, I'll get back to work I don't want any trouble (listen)");
                     Console.WriteLine("3. Yeah, look over there! (attempt escape)");
-
                     Console.Write("Choice: ");
                     string choice2 = Console.ReadLine();
-
-                    // Attacking side character Jonavo choice2
                     if (choice2 == "1")
                     {
                         Fights fight = new Fights(playerCharacter);
-                        // Prepare enemy details:
                         int enemyHealth = 50;
                         int enemyStrength = 10;
                         int enemySpeed = 12;
                         int enemyLuck = 5;
                         fight.Battle(ref enemyHealth, enemyStrength, enemySpeed, enemyLuck);
-                        // Battle outcome
                         if (playerCharacter.Health <= 0)
                         {
                             Console.WriteLine("You have been defeated!");
@@ -137,37 +114,27 @@ namespace TextAdventure
                             playerCharacter.AddToInventory("cell key");
                             Console.WriteLine("*It felt good taking that guy down*\n");
                             Console.WriteLine("*You realize more will come soon, no turning back now its escape or die*\n");
-
-                            // player choice
                             Console.WriteLine("_______Choice________");
                             Console.WriteLine("1. Come up with a plan (intelligence roll)");
                             Console.WriteLine("2. Fight your way through the exit");
-
                             Console.Write("Choice: ");
                             string choice3 = Console.ReadLine();
-                            
                             if (choice3 == "1")
                             {
-
                                 Dungion intro = new Dungion();
                                 intro.DungionIntro(playerCharacter);
                                 Console.Write("Choice: ");
                                 string choice4 = Console.ReadLine();
-
-
                                 if (choice4 == "1")
                                 {
-                                    // Uses dungeon method logic
                                     Dungion stevedungion = new Dungion();
                                     stevedungion.SteveDungionStory(playerCharacter);
                                 }
                                 else if (choice4 == "2")
                                 {
-                                    // Uses dungeon method logic
                                     Dungion dandavishdungion = new Dungion();
                                     dandavishdungion.DandavishDungionStory(playerCharacter);
                                 }
-
                             }
                             else if (choice3 == "2")
                             {
@@ -178,28 +145,20 @@ namespace TextAdventure
                             {
                                 Console.WriteLine("Invalid entry");
                             }
-                                
-
-                            
                         }
                     }
-                    // User listens to guard
                     else if (choice2 == "2")
                     {
                         Console.WriteLine("*You go back down to the factory floor very tired and exhausted.*");
                         Console.WriteLine("*You think back to a time before your village was invaded, a time when you used to be free*");
                         Console.WriteLine("*You also think about how dangerous it is to escape the factory, not to mention impossible*");
-
                         Ending end = new Ending();
                         end.LameEnding();
                     }
-                    // User tries to escape
                     else if (choice2 == "3")
                     {
-                        // Roll luck
                         int luckRoll = luckDice.Next(0, playerCharacter.Luck);
                         int luck = playerCharacter.Speed + luckRoll;
-                        // If lucky, enemy will fall for the trick
                         if (luck > 30)
                         {
                             Console.WriteLine(guardJonavo);
@@ -210,16 +169,13 @@ namespace TextAdventure
                             Console.WriteLine("*You escape his sight knowing you still need a key to escape*\n");
                             Console.WriteLine("*You wonder if there might be another way, but then again there might not be*\n");
                             Console.WriteLine("*You also remember the guard who you just escaped from, there is no time to lose*\n");
-
                             Console.WriteLine("_______Choice________");
                             Console.WriteLine("1. Come up with a plan (intelligence roll)");
                             Console.WriteLine("2. Fight your way through the exit");
                             Console.WriteLine("3. Surrender");
                             string choice3 = Console.ReadLine();
-
                             if (choice3 == "1")
                             {
-                                // Intelligence roll
                                 luck = playerCharacter.Intelligence + luckRoll;
                                 if (luck > 30)
                                 {
@@ -227,22 +183,16 @@ namespace TextAdventure
                                     intro.DungionIntro(playerCharacter);
                                     Console.Write("Choice: ");
                                     string choice4 = Console.ReadLine();
-
-
                                     if (choice4 == "1")
                                     {
-                                        // Uses dungeon method logic
                                         Dungion stevedungion = new Dungion();
                                         stevedungion.SteveDungionStory(playerCharacter);
                                     }
                                     else if (choice4 == "2")
                                     {
-                                        // Uses dungeon method logic
                                         Dungion dandavishdungion = new Dungion();
                                         dandavishdungion.DandavishDungionStory(playerCharacter);
                                     }
-
-                                    
                                 }
                                 else
                                 {
@@ -251,10 +201,8 @@ namespace TextAdventure
                             }
                             else if (choice3 == "2")
                             {
-                                //player charges exit
                                 Choices exitcharge = new Choices();
                                 exitcharge.ChargeExit(playerCharacter);
-
                             }
                             else if (choice3 == "3")
                             {
@@ -262,7 +210,6 @@ namespace TextAdventure
                                 Console.WriteLine("*You realize you have no choice but to go back to the factory floor*\n");
                                 Console.WriteLine("*You think back to a time before your village was invaded, a time when you used to be free*\n");
                                 Console.WriteLine("*You also think about how dangerous it is to escape the factory, not to mention impossible*\n");
-
                                 Ending end = new Ending();
                                 end.LameEnding();
                             }
@@ -274,41 +221,32 @@ namespace TextAdventure
                         else
                         {
                             Console.WriteLine($"Speed: {playerCharacter.Speed}, Luck Boost: {luckRoll}, Total Roll: {luck}, Required: 30+\n");
-
                             Console.WriteLine("*You attempt to run away while he is distracted but you were not fast or lucky enough to escape*\n");
                             Console.WriteLine("*He delivers a blow to your leg and you fall to the ground*\n");
                             Console.WriteLine("*You lose 50 health points*\n");
                             playerCharacter.Health = playerCharacter.Health - 50;
-
                             Console.WriteLine(guardJonavo);
                             Console.WriteLine("--------------------------------------------------------------");
                             Console.WriteLine("You've really pissed me off, I'm going to enjoy killing you...");
                             Console.WriteLine("--------------------------------------------------------------");
-
                             Console.WriteLine("*He lifts his weapon preparing to strike you*\n");
-
                             Console.WriteLine("_________Choice_________");
                             Console.WriteLine("1. Beg for mercy");
                             Console.WriteLine("2. Dodge the attack");
                             Console.WriteLine("3. Block the attack");
                             string choice3 = Console.ReadLine();
-
                             if (choice3 == "1")
                             {
                                 Console.WriteLine("\nNo, you're going to die like the pathetic worm you are!\n");
                                 Console.WriteLine("*He doesn't care about your plea, he strikes you anyways with a devastating ruthless blow*\n");
                                 Console.WriteLine("*You are badly injured but have no choice but to fight or you will surely die*\n");
                                 playerCharacter.Health = playerCharacter.Health - 150;
-
-                                // Fight logic
                                 Fights fight = new Fights(playerCharacter);
-                                // Prepare enemy details:
                                 int enemyHealth = 50;
                                 int enemyStrength = 10;
                                 int enemySpeed = 12;
                                 int enemyLuck = 5;
                                 fight.Battle(ref enemyHealth, enemyStrength, enemySpeed, enemyLuck);
-                                // Battle outcome
                                 if (playerCharacter.Health <= 0)
                                 {
                                     Console.WriteLine("You have been defeated!");
@@ -322,17 +260,13 @@ namespace TextAdventure
                                     intro.DungionIntro(playerCharacter);
                                     Console.Write("Choice: ");
                                     string choice4 = Console.ReadLine();
-
-
                                     if (choice4 == "1")
                                     {
-                                        // Uses dungeon method logic
                                         Dungion stevedungion = new Dungion();
                                         stevedungion.SteveDungionStory(playerCharacter);
                                     }
                                     else if (choice4 == "2")
                                     {
-                                        // Uses dungeon method logic
                                         Dungion dandavishdungion = new Dungion();
                                         dandavishdungion.DandavishDungionStory(playerCharacter);
                                     }
@@ -343,7 +277,6 @@ namespace TextAdventure
                                 int luckDiceRole = luckDice.Next();
                                 int speed = playerCharacter.Speed;
                                 int role = luckDiceRole + speed;
-
                                 if (role > 30)
                                 {
                                     Console.WriteLine("*You successfully dodge his strike moving out of the way quickly*\n");
@@ -357,16 +290,12 @@ namespace TextAdventure
                                     Console.WriteLine("*He strikes you with a devastating blow*\n");
                                     Console.WriteLine("*You realize you're too injured to escape fast enough, you have no choice but to fight*");
                                     playerCharacter.Health = playerCharacter.Health - 100;
-
-                                    // Fight logic
                                     Fights fight = new Fights(playerCharacter);
-                                    // Prepare enemy details:
                                     int enemyHealth = 50;
                                     int enemyStrength = 10;
                                     int enemySpeed = 12;
                                     int enemyLuck = 5;
                                     fight.Battle(ref enemyHealth, enemyStrength, enemySpeed, enemyLuck);
-                                    // Battle outcome
                                     if (playerCharacter.Health <= 0)
                                     {
                                         Console.WriteLine("You have been defeated!");
@@ -380,17 +309,13 @@ namespace TextAdventure
                                         intro.DungionIntro(playerCharacter);
                                         Console.Write("Choice: ");
                                         string choice4 = Console.ReadLine();
-
-
                                         if (choice4 == "1")
                                         {
-                                            // Uses dungeon method logic
                                             Dungion stevedungion = new Dungion();
                                             stevedungion.SteveDungionStory(playerCharacter);
                                         }
                                         else if (choice4 == "2")
                                         {
-                                            // Uses dungeon method logic
                                             Dungion dandavishdungion = new Dungion();
                                             dandavishdungion.DandavishDungionStory(playerCharacter);
                                         }
@@ -402,12 +327,10 @@ namespace TextAdventure
                                 int luckDicerole = luckDice.Next();
                                 int strength = playerCharacter.Strength;
                                 int role = luckDicerole + strength;
-
-                                if (role > 30) // Strength requirement
+                                if (role > 30)
                                 {
                                     Console.WriteLine("\n*You SUCCESSFULLY blocked his attack*\n");
                                     Console.WriteLine("*He stumbles back, looking increasingly angry*\n");
-
                                     Console.WriteLine("____Choice____");
                                     Console.WriteLine("1. Run");
                                     Console.WriteLine("2. Fight");
@@ -416,19 +339,15 @@ namespace TextAdventure
                                 {
                                     Console.WriteLine("*You FAILED to block his attack*");
                                     Console.WriteLine("*His weapon busts through your guard throwing you to the ground*\n");
-
                                     playerCharacter.Health = playerCharacter.Health - 50;
-
                                     Console.WriteLine(guardJonavo);
                                     Console.WriteLine("-------------------------------------------");
                                     Console.WriteLine("Nice try, but should have known your place.");
                                     Console.WriteLine("-------------------------------------------");
-
                                     Console.WriteLine("\n*You realize there's no time to run now*\n");
                                 }
                             }
                         }
-                        // If unlucky, enemy will fight you and strike first
                     }
                 }
                 else if (choice1 == "listen")
@@ -436,7 +355,6 @@ namespace TextAdventure
                     Console.WriteLine("*You go back down to the factory floor very tired and exhausted.*");
                     Console.WriteLine("*You think back to a time before your village was invaded, a time when you used to be free*");
                     Console.WriteLine("*You also think about how dangerous it is to escape the factory, not to mention impossible*");
-
                     Ending end = new Ending();
                     end.LameEnding();
                 }
@@ -450,25 +368,19 @@ namespace TextAdventure
     public static class DiceUtility
     {
         private static Random random = new Random();
-
-        // Roll for critical hits or other purposes
         public static int RollDice(int sides)
         {
             return random.Next(1, sides + 1);
         }
-
-        // Roll for luck, adding a modifier based on a character's attribute
         public static int RollWithModifier(int modifier, int max)
         {
             return random.Next(0, modifier) + RollDice(max);
         }
-
         public static int RollWithLuck(int luck)
         {
             return random.Next(1, luck + 1);
         }
     }
-
 
     public class Character
     {
@@ -480,39 +392,30 @@ namespace TextAdventure
         public int Luck { get; set; }
         public string Image { get; set; }
         public int Health { get; set; }
-        // Inventory
         private Inventory inventory;
-
         public Character(string name, string characterClass)
         {
             Name = name;
             Class = characterClass;
             InitializeAttributes(characterClass);
-
-            // Initialize inventory
             inventory = new Inventory();
         }
-
         public void ShowInventory()
         {
             inventory.DisplayItems();
         }
-
         public bool CheckInventory(string item)
         {
             return inventory.HasItem(item);
         }
-
         public void RemoveFromInventory(string item)
         {
             inventory.RemoveItem(item);
         }
-
         public void AddToInventory(string item)
         {
             inventory.AddItem(item);
         }
-
         private void InitializeAttributes(string characterClass)
         {
             switch (characterClass.ToLower())
@@ -546,7 +449,6 @@ namespace TextAdventure
                         /_/  \_\
                     ";
                     break;
-
                 case "elf":
                     Health = 300;
                     Strength = 10;
@@ -574,7 +476,6 @@ namespace TextAdventure
                         /+/  \+\
                     ";
                     break;
-
                 case "dwarf":
                     Health = 300;
                     Strength = 40;
@@ -600,7 +501,6 @@ namespace TextAdventure
                         /#/  \#\
                     ";
                     break;
-
                 case "human":
                     Health = 300;
                     Strength = 20;
@@ -630,7 +530,6 @@ namespace TextAdventure
                         /#/  \#\
                     ";
                     break;
-
                 default:
                     Strength = 1;
                     Intelligence = 1;
@@ -644,18 +543,15 @@ namespace TextAdventure
     class Inventory
     {
         private List<string> items = new List<string>();
-
         public void AddItem(string item)
         {
             items.Add(item);
             Console.WriteLine($"\n*{item} has been added to inventory*\n");
         }
-
         public bool HasItem(string item)
         {
             return items.Contains(item);
         }
-
         public void RemoveItem(string item)
         {
             if (HasItem(item))
@@ -668,7 +564,6 @@ namespace TextAdventure
                 Console.WriteLine($"\n*{item} is not in your inventory*\n");
             }
         }
-
         public void DisplayItems()
         {
             Console.WriteLine("Inventory Items:");
@@ -684,67 +579,40 @@ namespace TextAdventure
         private Character playerCharacter;
         private Random critDice = new Random();
         private Random luckDice = new Random();
-
         public Fights(Character player)
         {
             playerCharacter = player;
         }
-
         public void Battle(ref int enemyHealth, int enemyStrength, int enemySpeed, int enemyLuck)
         {
             Console.WriteLine($"The battle between {playerCharacter.Name} and the guard begins!");
-
             do
             {
-                //int roll = critDice.Next(1, 5);
-                //int userLuck = luckDice.Next(0, playerCharacter.Luck);
-                //int totalDamage = playerCharacter.Strength * roll + userLuck;
-                //int enemyTotalDamage = enemyStrength * roll + enemyLuck;
-
                 int roll = DiceUtility.RollDice(5);
                 int totalDamage = DiceUtility.RollWithModifier(playerCharacter.Strength, 20) + roll;
                 int enemyTotalDamage = DiceUtility.RollWithModifier(enemyStrength, 20) + roll;
                 int userLuck = DiceUtility.RollWithLuck(playerCharacter.Luck);
-
                 Console.WriteLine("1. Attack");
                 Console.WriteLine("2. View inventory");
                 Console.Write("Choice: ");
                 string fightOption = Console.ReadLine();
-
                 if (fightOption == "1")
                 {
-                    // Player attack
-                    Console.WriteLine();
                     Console.WriteLine($"You attack for {totalDamage} damage!");
                     enemyHealth -= totalDamage;
-
                     Console.WriteLine($"Enemy Health: {enemyHealth}\n");
-
                     Console.WriteLine($"Strength: {playerCharacter.Strength}");
                     Console.WriteLine($"Speed: {playerCharacter.Speed}");
-                    //Console.WriteLine($"Luck: {userLuck}");
-                    Console.WriteLine($"Critical: {roll}\n");
-                    
-
                     Console.Write("Press any key to confirm........");
-                    Console.ReadLine(); Console.WriteLine();
-
-                    // Stops enemy from attacking if dead
+                    Console.ReadLine(); 
                     if (enemyHealth <= 0)
                     {
                         continue;
                     }
-
-                    // Enemy attack
                     Console.WriteLine($"Enemy attacks for {enemyTotalDamage} damage!");
-                    Console.WriteLine($"Strength: {enemyStrength}");
-                    Console.WriteLine($"Speed: {enemySpeed}");
-                    //Console.WriteLine($"Luck: {enemyLuck}");
-                    Console.WriteLine($"Critical: {roll}");
                     playerCharacter.Health = playerCharacter.Health - enemyTotalDamage;
                     Console.WriteLine($"Your Health: {playerCharacter.Health}");
                     Console.WriteLine();
-
                     Console.Write("Press Enter to confirm........");
                     Console.ReadLine();
                     Console.WriteLine();
@@ -767,17 +635,14 @@ namespace TextAdventure
         {
             Console.WriteLine("You got: The good ending! You escaped the factory and lived to tell the tale. You were never heard from again.");
         }
-
         public void BadEnding()
         {
             Console.WriteLine("*You fall to the ground in pain, barely conscious.*\n");
             Console.WriteLine("*You feel yourself becoming lighter as your blood spills on the floor.*\n");
             Console.WriteLine("*You close your eyes and drift off into the darkness.*\n");
-
             Console.WriteLine("_________________END OF GAME_____________________");
             Console.WriteLine("You got: The bad ending! You died in the factory. You were never heard from again.");
         }
-
         public void LameEnding()
         {
             Console.WriteLine("_________________END OF GAME_____________________");
@@ -793,12 +658,10 @@ namespace TextAdventure
             Console.WriteLine(playerCharacter.Image);
             Console.WriteLine("\n*You stand there and think for a little while trying to come up with the best solution*\n");
             Console.WriteLine("*You come up with a plan*\n");
-
             Console.WriteLine("*'Luckily there aren't very many guards available today' you think*\n");
             Console.WriteLine("*'I don't think I'm quite strong enough to make it out myself'*");
             Console.WriteLine("*'There are also some pretty strong people locked in the dungeon, not to mention the horrific creatures'*\n");
             Console.WriteLine("*'If I can free some of the prisoners Then they might help me escape'*\n");
-                                    
             Console.WriteLine("You manage to sneak your way down to the dungeon\n");
             Console.WriteLine(@"
                 _________________________________________________________
@@ -821,23 +684,16 @@ namespace TextAdventure
                 /                                             _ -           \
                 /   -_- _ -             _- _---                       -_-  -_ \
             ");
-
             Console.WriteLine("\n*You've been sent down here before for defending yourself against a guard*\n");
             Console.WriteLine("*This place is where they experiment on and torture factory workers*\n");
             Console.WriteLine("*Most people who get sent down here don't come back up to the factory floor*");
-
             Console.WriteLine("______Choice______");
             Console.WriteLine("1. Go to the left");
             Console.WriteLine("2. Go to the right");
-
         }
-    
         public void SteveDungionStory(Character playerCharacter)
         {
-          
-            
             Console.WriteLine("*You go to the left*");
-
             Console.WriteLine("*As you walk you hear a voice call out to you from a cell....*");
             Console.WriteLine("*You walk towards the cell, the voice sounds familiar *");
             Console.WriteLine("*It's Dynamite Steve, the man crazy enough to blow up anything. He's either a boogeyman or a hero depending on who you are*");
@@ -863,67 +719,45 @@ namespace TextAdventure
                     b.--d .d88888P8888888888888888a:f888888|888888b             
                     88888b 888888|8888888888888888888888888\8888888  
                 ");
-
             Console.WriteLine("-----------------------------------------------------------------------------------------");
             Console.WriteLine($"Well, well, well..... if it isn't {playerCharacter.Name}. Bet you thought I was dead huh? Did you miss old Dynamite Steve? HAHA, I heard all the commotion upstairs, sounds like you're finally busting out. What a coincidence I'm busting out of here too...Got a key?");
             Console.WriteLine("-----------------------------------------------------------------------------------------");
-            // Check user inventory for a key
-
-            // If user inventory has key
             if (playerCharacter.CheckInventory("key"))
             {
                 Console.WriteLine("*You pull the key out of your pocket and show him*\n");
-
                 Console.WriteLine("--------------------------------------------------------");
                 Console.WriteLine("Wow lucky, Now I don't have to blow a hole in this cell");
                 Console.WriteLine("--------------------------------------------------------");
-
                 Console.WriteLine("\n*His face changes from excitement to disappointment*\n");
-
                 Console.WriteLine("-------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("I guess we can save these bombs I made for the exit, and by exit I of course mean creating our own exit");
                 Console.WriteLine("-------------------------------------------------------------------------------------------------------");
-
                 Console.WriteLine("\n*He seems to brighten back up*\n");
-                // Add bomb to inventory
                 playerCharacter.RemoveFromInventory("key");
                 Console.Write("Press any key to continue.......");
                 Console.ReadLine();
             }
             else
             {
-                // If user inventory does not contain key
                 Console.WriteLine("*You shake your head no, yet you notice he doesn't seem the slightest bit disappointed. In fact, he seems happy you don't have the key*\n");
                 Console.WriteLine("------------------------------------------------");
                 Console.WriteLine("HAHAHAHA, oh well....I'd stand back if I were you");
                 Console.WriteLine("------------------------------------------------");
-
                 Console.WriteLine("\n*Confused at first, you now realize what he's doing. You run to cover quickly*\n");
                 Console.WriteLine("*BOOM!!!!*");
                 Console.WriteLine("*The cell explodes open and the ground and ceiling shake as rubble falls from the ceiling*");
-                // Luck test
-                // If user is lucky enough to escape explosion
                 Console.WriteLine("Luckily you escaped just in time");
-
-                // If user is not lucky enough to escape explosion
                 Console.WriteLine("*Not being fast enough you get caught in the explosion as well getting knocked to the ground*\n");
                 Console.WriteLine($"{playerCharacter.Health} - 75 = Health: {playerCharacter.Health - 75}");
-                    playerCharacter.Health = playerCharacter.Health - 75;
-
+                playerCharacter.Health = playerCharacter.Health - 75;
                 Console.WriteLine("*He stumbles out of the cell coughing and wheezing, clearly injured*\n");
-
                 Console.WriteLine("-------------------------------------------------------------------------");
                 Console.WriteLine("HAHAHA, oops my bad went a little too big again... You're still alive right?");
                 Console.WriteLine("-------------------------------------------------------------------------");
-
-                    // Insert dialog options
-
                 Console.WriteLine("1. Yeah no thanks to you, what next?");
                 Console.WriteLine("2. You're crazy!");
                 Console.WriteLine("3. What the fuck is your problem man?");
-
                 string dialog2 = Console.ReadLine();
-
                 if (dialog2 == "1")
                 {
                     Console.WriteLine("-------------------------------------------------------------------------------------------------");
@@ -948,18 +782,14 @@ namespace TextAdventure
                     Console.WriteLine("No idea what you said but let's go HAHA");
                     Console.WriteLine("-----------------------------------");
                 }
-
                 Console.WriteLine("*\nYou agree and follow Steve out of the dungeon, he seems to know where he's going*\n");
-
                 Console.WriteLine("--------------------------------------------------------------------------------------------");
                 Console.WriteLine("No point in trying to blow our way out from down here, hell we'd just cave ourselves in HAHA! We need to make it to the first floor. Problem is we may need more boom powder than this for our exit. There is boom powder and resources in the storage room down here if we want our big bang of an exit which means you'll need to buy me some time.");
                 Console.WriteLine("--------------------------------------------------------------------------------------------");
-
                 Console.WriteLine("___Choice___");
                 Console.WriteLine("1. Buy Dynamite Steve some time");
                 Console.WriteLine("2. Make do with what we have");
                 string choice6 = Console.ReadLine();
-
                 if (choice6 == "1")
                 {
                     Console.WriteLine("------------------------------------");
@@ -972,16 +802,12 @@ namespace TextAdventure
                     Console.WriteLine("Fine I'll make do with what we have but just know our exit won't be as spectacular now. Lame ah escape.");
                     Console.WriteLine("--------------------------------------------------------------------------------------------");
                 }
-
                 Console.WriteLine("STORY TBC.............");
-                //TODO finish steve story
             }
-            
         }
         public void DandavishDungionStory(Character playerCharacter)
         {
             Console.WriteLine("You go to the right");
-
             Console.WriteLine("*As you walk you hear a voice call out to you from a cell....*");
             Console.WriteLine("*You walk towards the cell curious as to who it is*");
             Console.WriteLine(@"
@@ -1008,17 +834,14 @@ namespace TextAdventure
                                         :::     :   ::    `:.      :.  .:      .:'    ::   :     :::
                                         ' :       :::'      :.      `::'      .:      `:::       : `
                                     ");
-
             Console.WriteLine("\n---------------------------------------------------------------------");
             Console.WriteLine("Hello, Who are you? what brings you down here? I heard commotion upstairs");
             Console.WriteLine("-----------------------------------------------------------------------");
-
             Console.WriteLine("____Speak_____");
             Console.WriteLine("1. Looking for help busting out of here");
             Console.WriteLine("2. Who are you?");
             Console.WriteLine("3. Don't worry about why I'm down here");
             string dialog = Console.ReadLine();
-
             if (dialog == "1")
             {
                 Console.WriteLine("--------------------------------------------------------------------------------------");
@@ -1041,65 +864,51 @@ namespace TextAdventure
             {
                 Console.WriteLine("Invalid entry.......");
             }
-
             Console.WriteLine("___Choice____");
             Console.WriteLine("1. Help him escape");
             Console.WriteLine("2. Move on to the other cell");
             string choice5 = Console.ReadLine();
-
             if (choice5 == "1")
             {
                 Console.WriteLine("\n*You choose to help him escape*\n");
                 Console.WriteLine("-------------------------------------------------------------------------------------");
                 Console.WriteLine("Great, now that I have some help we'll finally be able to bust out of here stand back!");
                 Console.WriteLine("-------------------------------------------------------------------------------------");
-
                 Console.WriteLine("\n*Using his sheer strength, he bends and pries the bars loose, causing the metal frame to crack and fall apart*\n");
                 Console.WriteLine("\n*You stare at the bars surprised and wonder why he even needs your help in the first place*\n");
-
                 Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("I already have a plan to get out of here I just needed one more person as capable as you, Your timing is excellent!");
                 Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
-
                 Console.WriteLine("-----------------------------------------------------------------------");
                 Console.WriteLine("There is a secret passage that leads to an underground tunnel only I know about. It was a tunnel we built to sneak out factory workers and fellow revolutionists but, we were caught on our last mission. Thankfully they never found it.");
                 Console.WriteLine("-----------------------------------------------------------------------");
-
                 Console.WriteLine("Story TBC...................");
             }
             else if (choice5 == "2")
             {
                 Console.WriteLine("\n*You chose to leave him there check the other cell instead*\n");
-                //Dynomite Steve's cell logic
             }
             else
             {
                 Console.WriteLine("Invalid entry.......");
             }
-    
         }
     }
 
     class Choices
     {
-        //TODO modularize choices
         public void ChargeExit(Character playerCharacter)
         {
             Console.WriteLine("*You gather all your strength and charge for the exit. you've decided to go for it!*\n");
             Console.WriteLine("*You run as fast as you can, dodging and weaving through obstacles and workers*\n");
             Console.WriteLine("*You make it near the exit and see another guard already there*\n");
             Console.WriteLine("*You hear the guard from before catching up, it's obvious you're going to have to fight both of them at once*\n");
-            //Console.WriteLine($"{guardJonavo}           {guardJonavo}"); //! needs fixed
-
-            // Fighting 2 guards at once
             Fights fight = new Fights(playerCharacter);
-            // Prepare enemy details:
             int enemyHealth = 80;
             int enemyStrength = 82;
             int enemySpeed = 20;
             int enemyLuck = 12;
             fight.Battle(ref enemyHealth, enemyStrength, enemySpeed, enemyLuck);
-            // Battle outcome
             if (playerCharacter.Health <= 0)
             {
                 Console.WriteLine("You have been defeated!");
@@ -1109,76 +918,21 @@ namespace TextAdventure
             else if (enemyHealth <= 0)
             {
                 Console.WriteLine("You have defeated the enemy!");
-
                 Console.WriteLine("*You've made it to the exit, you see the door is locked and you need a key to open it*\n");
                 Console.WriteLine("*You also see a guard running towards you from the distance*\n");
                 Console.WriteLine("*You realize you have to think of something quick or enter another fight*\n");
-                // Choices
                 Console.WriteLine("1. Fight the guard");
                 Console.WriteLine("2. Think of something (intelligence roll)");
                 Console.Write("Choice: ");
                 string choice = Console.ReadLine();
-
-                // Fighting the guard
                 if (choice == "1")
                 {
-                Fights fight2 = new Fights(playerCharacter);
-                // Prepare enemy details:
-                int enemyHealth2 = 50;
-                int enemyStrength2 = 10;
-                int enemySpeed2 = 12;
-                int enemyLuck2 = 5;
-                fight2.Battle(ref enemyHealth2, enemyStrength2, enemySpeed2, enemyLuck2);
-                // Battle outcome
-                if (playerCharacter.Health <= 0)
-                {
-                    Console.WriteLine("You have been defeated!");
-                    Ending end = new Ending();
-                    end.BadEnding();
-                }
-                else if (enemyHealth2 <= 0)
-                {
-                    Console.WriteLine("You have defeated the enemy!");
-                    Console.WriteLine("*You see one of the guards you just defeated dropped his key on the ground, you pick it up and unlock the door*\n");
-                    Console.WriteLine("*You open the door and run out of the factory*\n");
-                    Console.WriteLine("*You feel the warmth and smell of freedom, you burst out in joy*\n");
-                    Console.WriteLine("*You run out the door and continue to run*\n");
-
-                    Console.WriteLine("_________________END OF GAME_____________________");
-                    Console.WriteLine("You got: The good ending! You escaped the factory and lived to tell the tale. You were never heard from again.");
-                    Console.WriteLine(playerCharacter.Image);
-                }
-            }
-            else if (choice == "2")
-            {
-                Console.WriteLine("*You look around and see the running towards you getting closer*\n");
-                // Intelligence roll
-                int intelligenceOutcome = DiceUtility.RollWithModifier(1, playerCharacter.Intelligence + 1);
-                if (intelligenceOutcome > 30)
-                {
-                    Console.WriteLine("*You see one of the guards you just defeated dropped his key on the ground, you pick it up and unlock the door*\n");
-                    Console.WriteLine("*You open the door and run out of the factory*\n");
-                    Console.WriteLine("*You feel the warmth and smell of freedom, you burst out in joy*\n");
-                    Console.WriteLine("*You run out the door and continue to run*\n");
-
-                    Console.WriteLine("_________________END OF GAME_____________________");
-                    Console.WriteLine("You got: The good ending! You escaped the factory and lived to tell the tale. You were never heard from again.");
-                    Console.WriteLine(playerCharacter.Image);
-                }
-                else
-                {
-                    Console.WriteLine("*You look around and see the guard running towards you getting closer*\n");
-                    Console.WriteLine("*You don't see a key anywhere, you realize you have no choice but to fight*\n");
-                    Console.WriteLine("*You prepare yourself for another fight*\n");
-                    // Fight logic
                     Fights fight2 = new Fights(playerCharacter);
-                    // Prepare enemy details:
                     int enemyHealth2 = 50;
                     int enemyStrength2 = 10;
                     int enemySpeed2 = 12;
                     int enemyLuck2 = 5;
                     fight2.Battle(ref enemyHealth2, enemyStrength2, enemySpeed2, enemyLuck2);
-                    // Battle outcome
                     if (playerCharacter.Health <= 0)
                     {
                         Console.WriteLine("You have been defeated!");
@@ -1192,15 +946,58 @@ namespace TextAdventure
                         Console.WriteLine("*You open the door and run out of the factory*\n");
                         Console.WriteLine("*You feel the warmth and smell of freedom, you burst out in joy*\n");
                         Console.WriteLine("*You run out the door and continue to run*\n");
-
                         Console.WriteLine("_________________END OF GAME_____________________");
                         Console.WriteLine("You got: The good ending! You escaped the factory and lived to tell the tale. You were never heard from again.");
+                        Console.WriteLine(playerCharacter.Image);
                     }
                 }
-            }
-            else
-            {
-                Console.WriteLine("Invalid entry");
+                else if (choice == "2")
+                {
+                    Console.WriteLine("*You look around and see the running towards you getting closer*\n");
+                    int intelligenceOutcome = DiceUtility.RollWithModifier(1, playerCharacter.Intelligence + 1);
+                    if (intelligenceOutcome > 30)
+                    {
+                        Console.WriteLine("*You see one of the guards you just defeated dropped his key on the ground, you pick it up and unlock the door*\n");
+                        Console.WriteLine("*You open the door and run out of the factory*\n");
+                        Console.WriteLine("*You feel the warmth and smell of freedom, you burst out in joy*\n");
+                        Console.WriteLine("*You run out the door and continue to run*\n");
+                        Console.WriteLine("_________________END OF GAME_____________________");
+                        Console.WriteLine("You got: The good ending! You escaped the factory and lived to tell the tale. You were never heard from again.");
+                        Console.WriteLine(playerCharacter.Image);
+                    }
+                    else
+                    {
+                        Console.WriteLine("*You look around and see the guard running towards you getting closer*\n");
+                        Console.WriteLine("*You don't see a key anywhere, you realize you have no choice but to fight*\n");
+                        Console.WriteLine("*You prepare yourself for another fight*\n");
+                        Fights fight2 = new Fights(playerCharacter);
+                        int enemyHealth2 = 50;
+                        int enemyStrength2 = 10;
+                        int enemySpeed2 = 12;
+                        int enemyLuck2 = 5;
+                        fight2.Battle(ref enemyHealth2, enemyStrength2, enemySpeed2, enemyLuck2);
+                        if (playerCharacter.Health <= 0)
+                        {
+                            Console.WriteLine("You have been defeated!");
+                            Ending end = new Ending();
+                            end.BadEnding();
+                        }
+                        else if (enemyHealth2 <= 0)
+                        {
+                            Console.WriteLine("You have defeated the enemy!");
+                            Console.WriteLine("*You see one of the guards you just defeated dropped his key on the ground, you pick it up and unlock the door*\n");
+                            Console.WriteLine("*You open the door and run out of the factory*\n");
+                            Console.WriteLine("*You feel the warmth and smell of freedom, you burst out in joy*\n");
+                            Console.WriteLine("*You run out the door and continue to run*\n");
+                            Console.WriteLine("_________________END OF GAME_____________________");
+                            Console.WriteLine("You got: The good ending! You escaped the factory and lived to tell the tale. You were never heard from again.");
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid entry");
+                }
             }
         }
     }
