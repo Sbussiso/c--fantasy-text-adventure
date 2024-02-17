@@ -134,7 +134,11 @@ namespace TextAdventure
                         else if (enemyHealth <= 0)
                         {
                             Console.WriteLine("You have defeated the enemy!");
-                            // TODO
+                            // TODO add key to inventory
+                            playerCharacter.AddToInventory("cell key");
+                            Console.WriteLine("*It felt good taking that guy down*");
+                            Console.WriteLine("*You realize more will come soon, no turning back now its escape or die*");
+                            // TODO modularized choices
                         }
                     }
                     // User listens to guard
@@ -177,109 +181,30 @@ namespace TextAdventure
                                 luck = playerCharacter.Intelligence + luckRoll;
                                 if (luck > 30)
                                 {
-                                    Console.WriteLine(playerCharacter.Image);
-                                    Console.WriteLine("\n*You stand there and think for a little while trying to come up with the best solution*\n");
-                                    Console.WriteLine("*You come up with a plan*\n");
+                                    Dungion intro = new Dungion();
+                                    intro.DungionIntro(playerCharacter);
+                                    Console.Write("Choice: ");
+                                    string choice4 = Console.ReadLine();
 
-                                    Console.WriteLine("*'Luckily there aren't very many guards available today' you think*\n");
-                                    Console.WriteLine("*'I don't think I'm quite strong enough to make it out myself'*");
-                                    Console.WriteLine("*'There are also some pretty strong people locked in the dungeon, not to mention the horrific creatures'*\n");
-                                    Console.WriteLine("*'If I can free some of the prisoners Then they might help me escape'*");
 
-                                    // Uses dungeon method logic
-                                    Dungion stevedungion = new Dungion();
-                                    stevedungion.SteveDungionStory(playerCharacter);
+                                    if (choice4 == "1")
+                                    {
+                                        // Uses dungeon method logic
+                                        Dungion stevedungion = new Dungion();
+                                        stevedungion.SteveDungionStory(playerCharacter);
+                                    }
+                                    else if (choice4 == "2")
+                                    {
+                                        // Uses dungeon method logic
+                                        Dungion dandavishdungion = new Dungion();
+                                        dandavishdungion.DandavishDungionStory(playerCharacter);
+                                    }
+
+                                    
                                 }
                                 else
                                 {
-                                    Console.WriteLine("You go to the right");
-
-                                    Console.WriteLine("*As you walk you hear a voice call out to you from a cell....*");
-                                    Console.WriteLine("*You walk towards the cell curious as to who it is*");
-                                    Console.WriteLine(@"
-                                        _..--'`;;`-..-';;'`--.._
-                                        .';,    _   `;;'   _    ,;`.
-                                        ;;'  `;;' `;.`;;'.;' `;;'  `;;
-                                        .;;._.;'`;.   `;;'   .;'`;._.;;.
-                                        ;'      '`;;`   `;;'   ';;'`      `;
-                                        ;:     .:.  `;;. `--' .;;'  .:.     :;
-                                        ;.   .:|:.     `;;;;'     .:|:.   .;
-                                        `;  `:|:'    .;;'`;;.    `:|:'  ;'
-                                        `;. `:'  .;;'.::::.`;;.  `:' .;'
-                                        `;._.;;' .:`::::':. `;;._.;'
-                                        .::::. `::   (:._.::._.:)   ::' .::::.
-                                        .:::::'  `::.`:_.--.`:::::. .--._:'.::'  `:::::.
-                                        .::'     `:.    `::-.:::"""":::.-::'   `::      `::.
-                                        .::'      .::'      | /.^^^..^^^.\ |      `::        `:.
-                                        :::      .:'::.     \( `;;;..;;;' )/     .::::       :::
-                                        ::  :  .:':.  `::.   \            /   .::'  .:     .  ::
-                                        :  ::  .   :     `::.              .::'     :  :   ::  :
-                                        .:  :    `.::.       `:.          .:'       .::.'    :  :.
-                                        ::  :  :   : :::.       `:.      .:'       .::: :   :  :  ::
-                                        ::  :        :' `:.       :.    .:       .:' `:        :  ::
-                                        :::     :   ::    `:.      :.  .:      .:'    ::   :     :::
-                                        ' :       :::'      :.      `::'      .:      `:::       : `
-                                    ");
-
-                                    Console.WriteLine("\n---------------------------------------------------------------------");
-                                    Console.WriteLine("Hello, Who are you? what brings you down here? I heard commotion upstairs");
-                                    Console.WriteLine("-----------------------------------------------------------------------");
-
-                                    Console.WriteLine("____Speak_____");
-                                    Console.WriteLine("1. Looking for help busting out of here");
-                                    Console.WriteLine("2. Who are you?");
-                                    Console.WriteLine("3. Don't worry about why I'm down here");
-                                    string dialog = Console.ReadLine();
-
-                                    if (dialog == "1")
-                                    {
-                                        Console.WriteLine("--------------------------------------------------------------------------------------");
-                                        Console.WriteLine("That's Great! I can help you, I can't make it out on my own but together we have a shot");
-                                        Console.WriteLine("--------------------------------------------------------------------------------------");
-                                    }
-                                    else if (dialog == "2")
-                                    {
-                                        Console.WriteLine("-------------------------------------------------------------------------------");
-                                        Console.WriteLine("I am Captain Dandavish, leader of the Crimson Dawn Revolutionists so i guess it's just Dandavish now. I have a feeling I don't need to explain to you what happened. Why don't we help each other escape from here?");
-                                        Console.WriteLine("-------------------------------------------------------------------------------");
-                                    }
-                                    else if (dialog == "3")
-                                    {
-                                        Console.WriteLine("----------------------------------------------------------------------------------");
-                                        Console.WriteLine("Wait!, I can be of great use to you if you help me get out of here! Where are you going to go when you get out? I know a place with lots of food and supplies. It was an outpost of ours, now destroyed but there is a hidden bunker underneath.");
-                                        Console.WriteLine("---------------------------------------------------------------------------------");
-                                    }
-
-                                    Console.WriteLine("___Choice____");
-                                    Console.WriteLine("1. Help him escape");
-                                    Console.WriteLine("2. Move on to the other cell");
-                                    string choice5 = Console.ReadLine();
-
-                                    if (choice5 == "1")
-                                    {
-                                        Console.WriteLine("\n*You choose to help him escape*\n");
-                                        Console.WriteLine("-------------------------------------------------------------------------------------");
-                                        Console.WriteLine("Great, now that I have some help we'll finally be able to bust out of here stand back!");
-                                        Console.WriteLine("-------------------------------------------------------------------------------------");
-
-                                        Console.WriteLine("\n*Using his sheer strength, he bends and pries the bars loose, causing the metal frame to crack and fall apart*\n");
-                                        Console.WriteLine("\n*You stare at the bars surprised and wonder why he even needs your help in the first place*\n");
-
-                                        Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
-                                        Console.WriteLine("I already have a plan to get out of here I just needed one more person as capable as you, Your timing is excellent!");
-                                        Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
-
-                                        Console.WriteLine("-----------------------------------------------------------------------");
-                                        Console.WriteLine("There is a secret passage that leads to an underground tunnel only I know about. It was a tunnel we built to sneak out factory workers and fellow revolutionists but, we were caught on our last mission. Thankfully they never found it.");
-                                        Console.WriteLine("-----------------------------------------------------------------------");
-
-                                        Console.WriteLine("Story TBC...................");
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("\n*You chose to leave him there check the other cell instead*\n");
-                                        //Dynomite Steve's cell logic
-                                    }
+                                    Console.WriteLine("invalid choice");
                                 }
                             }
                             else if (choice3 == "2")
@@ -874,9 +799,17 @@ namespace TextAdventure
 
     class Dungion
     {
-        public void SteveDungionStory(Character playerCharacter)
+        public void DungionIntro(Character playerCharacter)
         {
-          
+            Console.WriteLine(playerCharacter.Image);
+            Console.WriteLine("\n*You stand there and think for a little while trying to come up with the best solution*\n");
+            Console.WriteLine("*You come up with a plan*\n");
+
+            Console.WriteLine("*'Luckily there aren't very many guards available today' you think*\n");
+            Console.WriteLine("*'I don't think I'm quite strong enough to make it out myself'*");
+            Console.WriteLine("*'There are also some pretty strong people locked in the dungeon, not to mention the horrific creatures'*\n");
+            Console.WriteLine("*'If I can free some of the prisoners Then they might help me escape'*\n");
+                                    
             Console.WriteLine("You manage to sneak your way down to the dungeon\n");
             Console.WriteLine(@"
                 _________________________________________________________
@@ -904,21 +837,22 @@ namespace TextAdventure
             Console.WriteLine("*This place is where they experiment on and torture factory workers*\n");
             Console.WriteLine("*Most people who get sent down here don't come back up to the factory floor*");
 
-            Console.WriteLine("\n____Choice_____");
-            Console.WriteLine("1. Go Left");
-            Console.WriteLine("2. Go right");
+            Console.WriteLine("______Choice______");
+            Console.WriteLine("1. Go to the left");
+            Console.WriteLine("2. Go to the right");
 
-            string choice4 = Console.ReadLine();
+        }
+        public void SteveDungionStory(Character playerCharacter)
+        {
+          
+            
+            Console.WriteLine("*You go to the left*");
 
-            if (choice4 == "1")
-            {
-                Console.WriteLine("*You go to the left*");
-
-                Console.WriteLine("*As you walk you hear a voice call out to you from a cell....*");
-                Console.WriteLine("*You walk towards the cell, the voice sounds familiar *");
-                Console.WriteLine("*It's Dynamite Steve, the man crazy enough to blow up anything. He's either a boogeyman or a hero depending on who you are*");
-                Console.WriteLine("*You and everyone else thought he was executed years ago*");
-                Console.WriteLine(@"
+            Console.WriteLine("*As you walk you hear a voice call out to you from a cell....*");
+            Console.WriteLine("*You walk towards the cell, the voice sounds familiar *");
+            Console.WriteLine("*It's Dynamite Steve, the man crazy enough to blow up anything. He's either a boogeyman or a hero depending on who you are*");
+            Console.WriteLine("*You and everyone else thought he was executed years ago*");
+            Console.WriteLine(@"
                     .-'--''''.__    `.                                
                     |            `    |                                
                     (         `._....------.._.:          
@@ -940,118 +874,220 @@ namespace TextAdventure
                     88888b 888888|8888888888888888888888888\8888888  
                 ");
 
-                Console.WriteLine("-----------------------------------------------------------------------------------------");
-                Console.WriteLine($"Well, well, well..... if it isn't {playerCharacter.Name}. Bet you thought I was dead huh? Did you miss old Dynamite Steve? HAHA, I heard all the commotion upstairs, sounds like you're finally busting out. What a coincidence I'm busting out of here too...Got a key?");
-                Console.WriteLine("-----------------------------------------------------------------------------------------");
-                // Check user inventory for a key
+            Console.WriteLine("-----------------------------------------------------------------------------------------");
+            Console.WriteLine($"Well, well, well..... if it isn't {playerCharacter.Name}. Bet you thought I was dead huh? Did you miss old Dynamite Steve? HAHA, I heard all the commotion upstairs, sounds like you're finally busting out. What a coincidence I'm busting out of here too...Got a key?");
+            Console.WriteLine("-----------------------------------------------------------------------------------------");
+            // Check user inventory for a key
 
-                // If user inventory has key
-                if (playerCharacter.CheckInventory("key"))
-                {
-                    Console.WriteLine("*You pull the key out of your pocket and show him*\n");
+            // If user inventory has key
+            if (playerCharacter.CheckInventory("key"))
+            {
+                Console.WriteLine("*You pull the key out of your pocket and show him*\n");
 
-                    Console.WriteLine("--------------------------------------------------------");
-                    Console.WriteLine("Wow lucky, Now I don't have to blow a hole in this cell");
-                    Console.WriteLine("--------------------------------------------------------");
+                Console.WriteLine("--------------------------------------------------------");
+                Console.WriteLine("Wow lucky, Now I don't have to blow a hole in this cell");
+                Console.WriteLine("--------------------------------------------------------");
 
-                    Console.WriteLine("\n*His face changes from excitement to disappointment*\n");
+                Console.WriteLine("\n*His face changes from excitement to disappointment*\n");
 
-                    Console.WriteLine("-------------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("I guess we can save these bombs I made for the exit, and by exit I of course mean creating our own exit");
-                    Console.WriteLine("-------------------------------------------------------------------------------------------------------");
+                Console.WriteLine("-------------------------------------------------------------------------------------------------------");
+                Console.WriteLine("I guess we can save these bombs I made for the exit, and by exit I of course mean creating our own exit");
+                Console.WriteLine("-------------------------------------------------------------------------------------------------------");
 
-                    Console.WriteLine("\n*He seems to brighten back up*\n");
-                    // Add bomb to inventory
-                    playerCharacter.RemoveFromInventory("key");
-                    Console.Write("Press any key to continue.......");
-                    Console.ReadLine();
-                }
-                else
-                {
-                    // If user inventory does not contain key
-                    Console.WriteLine("*You shake your head no, yet you notice he doesn't seem the slightest bit disappointed. In fact, he seems happy you don't have the key*\n");
-                    Console.WriteLine("------------------------------------------------");
-                    Console.WriteLine("HAHAHAHA, oh well....I'd stand back if I were you");
-                    Console.WriteLine("------------------------------------------------");
+                Console.WriteLine("\n*He seems to brighten back up*\n");
+                // Add bomb to inventory
+                playerCharacter.RemoveFromInventory("key");
+                Console.Write("Press any key to continue.......");
+                Console.ReadLine();
+            }
+            else
+            {
+                // If user inventory does not contain key
+                Console.WriteLine("*You shake your head no, yet you notice he doesn't seem the slightest bit disappointed. In fact, he seems happy you don't have the key*\n");
+                Console.WriteLine("------------------------------------------------");
+                Console.WriteLine("HAHAHAHA, oh well....I'd stand back if I were you");
+                Console.WriteLine("------------------------------------------------");
 
-                    Console.WriteLine("\n*Confused at first, you now realize what he's doing. You run to cover quickly*\n");
-                    Console.WriteLine("*BOOM!!!!*");
-                    Console.WriteLine("*The cell explodes open and the ground and ceiling shake as rubble falls from the ceiling*");
-                    // Luck test
-                    // If user is lucky enough to escape explosion
-                    Console.WriteLine("Luckily you escaped just in time");
+                Console.WriteLine("\n*Confused at first, you now realize what he's doing. You run to cover quickly*\n");
+                Console.WriteLine("*BOOM!!!!*");
+                Console.WriteLine("*The cell explodes open and the ground and ceiling shake as rubble falls from the ceiling*");
+                // Luck test
+                // If user is lucky enough to escape explosion
+                Console.WriteLine("Luckily you escaped just in time");
 
-                    // If user is not lucky enough to escape explosion
-                    Console.WriteLine("*Not being fast enough you get caught in the explosion as well getting knocked to the ground*\n");
-                    Console.WriteLine($"{playerCharacter.Health} - 75 = Health: {playerCharacter.Health - 75}");
+                // If user is not lucky enough to escape explosion
+                Console.WriteLine("*Not being fast enough you get caught in the explosion as well getting knocked to the ground*\n");
+                Console.WriteLine($"{playerCharacter.Health} - 75 = Health: {playerCharacter.Health - 75}");
                     playerCharacter.Health = playerCharacter.Health - 75;
 
-                    Console.WriteLine("*He stumbles out of the cell coughing and wheezing, clearly injured*\n");
+                Console.WriteLine("*He stumbles out of the cell coughing and wheezing, clearly injured*\n");
 
-                    Console.WriteLine("-------------------------------------------------------------------------");
-                    Console.WriteLine("HAHAHA, oops my bad went a little too big again... You're still alive right?");
-                    Console.WriteLine("-------------------------------------------------------------------------");
+                Console.WriteLine("-------------------------------------------------------------------------");
+                Console.WriteLine("HAHAHA, oops my bad went a little too big again... You're still alive right?");
+                Console.WriteLine("-------------------------------------------------------------------------");
 
                     // Insert dialog options
 
-                    Console.WriteLine("1. Yeah no thanks to you, what next?");
-                    Console.WriteLine("2. You're crazy!");
-                    Console.WriteLine("3. What the fuck is your problem man?");
+                Console.WriteLine("1. Yeah no thanks to you, what next?");
+                Console.WriteLine("2. You're crazy!");
+                Console.WriteLine("3. What the fuck is your problem man?");
 
-                    string dialog2 = Console.ReadLine();
+                string dialog2 = Console.ReadLine();
 
-                    if (dialog2 == "1")
-                    {
-                        Console.WriteLine("-------------------------------------------------------------------------------------------------");
-                        Console.WriteLine("Whoops sorry about that, I'll be more careful next time. Guards will be here any minute now, as well as reinforcements from the capital after that one HAHA. I'll tell you what, there's more where that came from so you do the fighting and I'll blow us a hole out of here!");
-                        Console.WriteLine("-------------------------------------------------------------------------------------------------");
-                    }
-                    else if (dialog2 == "2")
-                    {
-                        Console.WriteLine("-------------------------------------------------------------------------------------------------");
-                        Console.WriteLine("ABSOLUTELY, good thing crazy is exactly what it's gonna take to make it out of here. You're not so sane either clearly, Did you even have a plan other than the date? HAHA! Why don't you handle the fighting and I'll gracefully build us an exit?");
-                        Console.WriteLine("-------------------------------------------------------------------------------------------------");
-                    }
-                    else if (dialog2 == "3")
-                    {
-                        Console.WriteLine("-------------------------------------------------------------------------------------------------");
-                        Console.WriteLine("HAHAHA how much time you got? Not long actually, after that explosion we're gonna have all the guards on our tail we better get out of here quick. Let's make a deal, you do the fighting and I'll blow us a hole out of this joint. No key or door required with good ol' TNT!");
-                        Console.WriteLine("-------------------------------------------------------------------------------------------------");
-                    }
-                    else
-                    {
-                        Console.WriteLine("-----------------------------------");
-                        Console.WriteLine("No idea what you said but let's go HAHA");
-                        Console.WriteLine("-----------------------------------");
-                    }
-
-                    Console.WriteLine("*\nYou agree and follow Steve out of the dungeon, he seems to know where he's going*\n");
-
-                    Console.WriteLine("--------------------------------------------------------------------------------------------");
-                    Console.WriteLine("No point in trying to blow our way out from down here, hell we'd just cave ourselves in HAHA! We need to make it to the first floor. Problem is we may need more boom powder than this for our exit. There is boom powder and resources in the storage room down here if we want our big bang of an exit which means you'll need to buy me some time.");
-                    Console.WriteLine("--------------------------------------------------------------------------------------------");
-
-                    Console.WriteLine("___Choice___");
-                    Console.WriteLine("1. Buy Dynamite Steve some time");
-                    Console.WriteLine("2. Make do with what we have");
-                    string choice6 = Console.ReadLine();
-
-                    if (choice6 == "1")
-                    {
-                        Console.WriteLine("------------------------------------");
-                        Console.WriteLine("Great! Our exit will be spectacular!");
-                        Console.WriteLine("------------------------------------");
-                    }
-                    else
-                    {
-                        Console.WriteLine("--------------------------------------------------------------------------------------------");
-                        Console.WriteLine("Fine I'll make do with what we have but just know our exit won't be as spectacular now. Lame ah escape.");
-                        Console.WriteLine("--------------------------------------------------------------------------------------------");
-                    }
-
-                    Console.WriteLine("STORY TBC.............");
+                if (dialog2 == "1")
+                {
+                    Console.WriteLine("-------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("Whoops sorry about that, I'll be more careful next time. Guards will be here any minute now, as well as reinforcements from the capital after that one HAHA. I'll tell you what, there's more where that came from so you do the fighting and I'll blow us a hole out of here!");
+                    Console.WriteLine("-------------------------------------------------------------------------------------------------");
                 }
+                else if (dialog2 == "2")
+                {
+                    Console.WriteLine("-------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("ABSOLUTELY, good thing crazy is exactly what it's gonna take to make it out of here. You're not so sane either clearly, Did you even have a plan other than the date? HAHA! Why don't you handle the fighting and I'll gracefully build us an exit?");
+                    Console.WriteLine("-------------------------------------------------------------------------------------------------");
+                }
+                else if (dialog2 == "3")
+                {
+                    Console.WriteLine("-------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("HAHAHA how much time you got? Not long actually, after that explosion we're gonna have all the guards on our tail we better get out of here quick. Let's make a deal, you do the fighting and I'll blow us a hole out of this joint. No key or door required with good ol' TNT!");
+                    Console.WriteLine("-------------------------------------------------------------------------------------------------");
+                }
+                else
+                {
+                    Console.WriteLine("-----------------------------------");
+                    Console.WriteLine("No idea what you said but let's go HAHA");
+                    Console.WriteLine("-----------------------------------");
+                }
+
+                Console.WriteLine("*\nYou agree and follow Steve out of the dungeon, he seems to know where he's going*\n");
+
+                Console.WriteLine("--------------------------------------------------------------------------------------------");
+                Console.WriteLine("No point in trying to blow our way out from down here, hell we'd just cave ourselves in HAHA! We need to make it to the first floor. Problem is we may need more boom powder than this for our exit. There is boom powder and resources in the storage room down here if we want our big bang of an exit which means you'll need to buy me some time.");
+                Console.WriteLine("--------------------------------------------------------------------------------------------");
+
+                Console.WriteLine("___Choice___");
+                Console.WriteLine("1. Buy Dynamite Steve some time");
+                Console.WriteLine("2. Make do with what we have");
+                string choice6 = Console.ReadLine();
+
+                if (choice6 == "1")
+                {
+                    Console.WriteLine("------------------------------------");
+                    Console.WriteLine("Great! Our exit will be spectacular!");
+                    Console.WriteLine("------------------------------------");
+                }
+                else
+                {
+                    Console.WriteLine("--------------------------------------------------------------------------------------------");
+                    Console.WriteLine("Fine I'll make do with what we have but just know our exit won't be as spectacular now. Lame ah escape.");
+                    Console.WriteLine("--------------------------------------------------------------------------------------------");
+                }
+
+                Console.WriteLine("STORY TBC.............");
+                //TODO finish steve story
             }
+            
+        }
+        public void DandavishDungionStory(Character playerCharacter)
+        {
+            Console.WriteLine("You go to the right");
+
+            Console.WriteLine("*As you walk you hear a voice call out to you from a cell....*");
+            Console.WriteLine("*You walk towards the cell curious as to who it is*");
+            Console.WriteLine(@"
+                                        _..--'`;;`-..-';;'`--.._
+                                        .';,    _   `;;'   _    ,;`.
+                                        ;;'  `;;' `;.`;;'.;' `;;'  `;;
+                                        .;;._.;'`;.   `;;'   .;'`;._.;;.
+                                        ;'      '`;;`   `;;'   ';;'`      `;
+                                        ;:     .:.  `;;. `--' .;;'  .:.     :;
+                                        ;.   .:|:.     `;;;;'     .:|:.   .;
+                                        `;  `:|:'    .;;'`;;.    `:|:'  ;'
+                                        `;. `:'  .;;'.::::.`;;.  `:' .;'
+                                        `;._.;;' .:`::::':. `;;._.;'
+                                        .::::. `::   (:._.::._.:)   ::' .::::.
+                                        .:::::'  `::.`:_.--.`:::::. .--._:'.::'  `:::::.
+                                        .::'     `:.    `::-.:::"""":::.-::'   `::      `::.
+                                        .::'      .::'      | /.^^^..^^^.\ |      `::        `:.
+                                        :::      .:'::.     \( `;;;..;;;' )/     .::::       :::
+                                        ::  :  .:':.  `::.   \            /   .::'  .:     .  ::
+                                        :  ::  .   :     `::.              .::'     :  :   ::  :
+                                        .:  :    `.::.       `:.          .:'       .::.'    :  :.
+                                        ::  :  :   : :::.       `:.      .:'       .::: :   :  :  ::
+                                        ::  :        :' `:.       :.    .:       .:' `:        :  ::
+                                        :::     :   ::    `:.      :.  .:      .:'    ::   :     :::
+                                        ' :       :::'      :.      `::'      .:      `:::       : `
+                                    ");
+
+            Console.WriteLine("\n---------------------------------------------------------------------");
+            Console.WriteLine("Hello, Who are you? what brings you down here? I heard commotion upstairs");
+            Console.WriteLine("-----------------------------------------------------------------------");
+
+            Console.WriteLine("____Speak_____");
+            Console.WriteLine("1. Looking for help busting out of here");
+            Console.WriteLine("2. Who are you?");
+            Console.WriteLine("3. Don't worry about why I'm down here");
+            string dialog = Console.ReadLine();
+
+            if (dialog == "1")
+            {
+                Console.WriteLine("--------------------------------------------------------------------------------------");
+                Console.WriteLine("That's Great! I can help you, I can't make it out on my own but together we have a shot");
+                Console.WriteLine("--------------------------------------------------------------------------------------");
+            }
+            else if (dialog == "2")
+            {
+                Console.WriteLine("-------------------------------------------------------------------------------");
+                Console.WriteLine("I am Captain Dandavish, leader of the Crimson Dawn Revolutionists so i guess it's just Dandavish now. I have a feeling I don't need to explain to you what happened. Why don't we help each other escape from here?");
+                Console.WriteLine("-------------------------------------------------------------------------------");
+            }
+            else if (dialog == "3")
+            {
+                Console.WriteLine("----------------------------------------------------------------------------------");
+                Console.WriteLine("Wait!, I can be of great use to you if you help me get out of here! Where are you going to go when you get out? I know a place with lots of food and supplies. It was an outpost of ours, now destroyed but there is a hidden bunker underneath.");
+                Console.WriteLine("---------------------------------------------------------------------------------");
+            }
+
+            Console.WriteLine("___Choice____");
+            Console.WriteLine("1. Help him escape");
+            Console.WriteLine("2. Move on to the other cell");
+            string choice5 = Console.ReadLine();
+
+            if (choice5 == "1")
+            {
+                Console.WriteLine("\n*You choose to help him escape*\n");
+                Console.WriteLine("-------------------------------------------------------------------------------------");
+                Console.WriteLine("Great, now that I have some help we'll finally be able to bust out of here stand back!");
+                Console.WriteLine("-------------------------------------------------------------------------------------");
+
+                Console.WriteLine("\n*Using his sheer strength, he bends and pries the bars loose, causing the metal frame to crack and fall apart*\n");
+                Console.WriteLine("\n*You stare at the bars surprised and wonder why he even needs your help in the first place*\n");
+
+                Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
+                Console.WriteLine("I already have a plan to get out of here I just needed one more person as capable as you, Your timing is excellent!");
+                Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
+
+                Console.WriteLine("-----------------------------------------------------------------------");
+                Console.WriteLine("There is a secret passage that leads to an underground tunnel only I know about. It was a tunnel we built to sneak out factory workers and fellow revolutionists but, we were caught on our last mission. Thankfully they never found it.");
+                Console.WriteLine("-----------------------------------------------------------------------");
+
+                Console.WriteLine("Story TBC...................");
+            }
+            else
+            {
+                Console.WriteLine("\n*You chose to leave him there check the other cell instead*\n");
+                //Dynomite Steve's cell logic
+            }
+    
+        }
+    }
+
+    class Choices
+    {
+        //TODO modularize choices
+        public void ChargeExit(Character playerCharacter)
+        {
+            //TODO modularize exit charge
         }
     }
 }
