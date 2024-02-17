@@ -111,7 +111,7 @@ namespace TextAdventure
                         else if (enemyHealth <= 0)
                         {
                             Console.WriteLine("You have defeated the enemy!");
-                            playerCharacter.AddToInventory("cell key");
+                            playerCharacter.AddToInventory("key");
                             Console.WriteLine("*It felt good taking that guy down*\n");
                             Console.WriteLine("*You realize more will come soon, no turning back now its escape or die*\n");
                             Console.WriteLine("_______Choice________");
@@ -756,7 +756,7 @@ namespace TextAdventure
                 Console.WriteLine("-------------------------------------------------------------------------");
                 Console.WriteLine("1. Yeah no thanks to you, what next?");
                 Console.WriteLine("2. You're crazy!");
-                Console.WriteLine("3. What the fuck is your problem man?");
+                Console.WriteLine("3. What the hell is your problem man?");
                 string dialog2 = Console.ReadLine();
                 if (dialog2 == "1")
                 {
@@ -782,28 +782,40 @@ namespace TextAdventure
                     Console.WriteLine("No idea what you said but let's go HAHA");
                     Console.WriteLine("-----------------------------------");
                 }
-                Console.WriteLine("*\nYou agree and follow Steve out of the dungeon, he seems to know where he's going*\n");
-                Console.WriteLine("--------------------------------------------------------------------------------------------");
-                Console.WriteLine("No point in trying to blow our way out from down here, hell we'd just cave ourselves in HAHA! We need to make it to the first floor. Problem is we may need more boom powder than this for our exit. There is boom powder and resources in the storage room down here if we want our big bang of an exit which means you'll need to buy me some time.");
-                Console.WriteLine("--------------------------------------------------------------------------------------------");
-                Console.WriteLine("___Choice___");
-                Console.WriteLine("1. Buy Dynamite Steve some time");
-                Console.WriteLine("2. Make do with what we have");
-                string choice6 = Console.ReadLine();
-                if (choice6 == "1")
-                {
-                    Console.WriteLine("------------------------------------");
-                    Console.WriteLine("Great! Our exit will be spectacular!");
-                    Console.WriteLine("------------------------------------");
-                }
-                else
-                {
-                    Console.WriteLine("--------------------------------------------------------------------------------------------");
-                    Console.WriteLine("Fine I'll make do with what we have but just know our exit won't be as spectacular now. Lame ah escape.");
-                    Console.WriteLine("--------------------------------------------------------------------------------------------");
-                }
-                Console.WriteLine("STORY TBC.............");
+                
             }
+
+            //exit with steve
+            Console.WriteLine("*\nYou agree and follow Steve out of the dungeon, he seems to know where he's going*\n");
+            Console.WriteLine("--------------------------------------------------------------------------------------------");
+            Console.WriteLine("No point in trying to blow our way out from down here, hell we'd just cave ourselves in HAHA! We need to make it to the first floor. Problem is we may need more boom powder than this for our exit. There is boom powder and resources in the storage room down here if we want our big bang of an exit which means you'll need to buy me some time.");
+            Console.WriteLine("--------------------------------------------------------------------------------------------");
+            Console.WriteLine("___Choice___");
+            Console.WriteLine("1. Buy Dynamite Steve some time");
+            Console.WriteLine("2. Make do with what we have");
+            string choice6 = Console.ReadLine();
+            if (choice6 == "1")
+            {
+                Console.WriteLine("------------------------------------");
+                Console.WriteLine("Great! Our exit will be spectacular!");
+                Console.WriteLine("------------------------------------");
+                //TODO fight guard to buy time
+                //TODO get boom powder
+    
+            }
+            else
+            {
+                Console.WriteLine("--------------------------------------------------------------------------------------------");
+                Console.WriteLine("Fine I'll make do with what we have but just know our exit won't be as spectacular now.");
+                Console.WriteLine("--------------------------------------------------------------------------------------------");
+            }
+            Console.WriteLine("STORY TBC.............");
+            //TODO go upstairs
+            //TODO fight guard
+            //TODO blow open wall with steve if you have the boom powder and escape   -Game ends
+            //TODO fight more guards if you do not have the boom powder
+            //TODO blow exit door if you do not have the boom powder
+            //TODO escape     -Game ends
         }
         public void DandavishDungionStory(Character playerCharacter)
         {
@@ -864,6 +876,8 @@ namespace TextAdventure
             {
                 Console.WriteLine("Invalid entry.......");
             }
+
+
             Console.WriteLine("___Choice____");
             Console.WriteLine("1. Help him escape");
             Console.WriteLine("2. Move on to the other cell");
@@ -882,11 +896,18 @@ namespace TextAdventure
                 Console.WriteLine("-----------------------------------------------------------------------");
                 Console.WriteLine("There is a secret passage that leads to an underground tunnel only I know about. It was a tunnel we built to sneak out factory workers and fellow revolutionists but, we were caught on our last mission. Thankfully they never found it.");
                 Console.WriteLine("-----------------------------------------------------------------------");
+
                 Console.WriteLine("Story TBC...................");
+                //TODO go upstairs
+                //TODO fight guard
+                //TODO locate tunnel
+                //TODO escape     -Game ends
             }
             else if (choice5 == "2")
             {
-                Console.WriteLine("\n*You chose to leave him there check the other cell instead*\n");
+                Console.WriteLine("\n*You chose to leave him there and check the other cell instead*\n");
+                Dungion stevedungion = new Dungion();
+                stevedungion.SteveDungionStory(playerCharacter);
             }
             else
             {
